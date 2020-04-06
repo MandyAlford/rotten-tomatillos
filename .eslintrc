@@ -12,7 +12,7 @@
     }
   },
 
-  "extends": ["eslint:recommended"],
+  "extends": ["eslint:recommended","plugin:prettier/recommended"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
