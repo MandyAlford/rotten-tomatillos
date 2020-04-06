@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
+import Login from '../Login/Login';
 import MoviesContainer from '../MoviesContainer/MoviesContainer'
 
 class App extends Component {
@@ -19,9 +20,15 @@ class App extends Component {
 
   render() {
     return (
-    <Route path='/' exact>
-      <MoviesContainer movies={this.state.movies} />
-    </Route>
+      <>
+        <Route path='/' exact>
+          <MoviesContainer movies={this.state.movies} />
+        </Route>
+
+        <Route path='/Login' exact>
+          <Login/>
+        </Route>
+      </>
     );
   };
 };
