@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Route, Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
+const BASE_URL = 'https://rancid-tomatillos.herokuapp.com/api/v1/login'
 const validEmailRegex = RegExp(
   // eslint-disable-next-line
   /^(([^<>()\[\]\.,;:\s@\']+(\.[^<>()\[\]\.,;:\s@\']+)*)|(\'.+\'))@(([^<>()[\]\.,;:\s@\']+\.)+[^<>()[\]\.,;:\s@\']{2,})$/i
@@ -11,8 +12,8 @@ class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      email:'',
-      password:'',
+      email:'greg@turing.io',
+      password:'abc123',
       errors: {
         email:''
       }
@@ -23,7 +24,6 @@ class Login extends React.Component {
     event.preventDefault();
     const {name,value} = event.target;
     let errors = this.state.errors;
-
     switch (name) {
       case "email":
         errors.email = validEmailRegex.test(value) ? "" : "Email is not valid";
@@ -32,6 +32,26 @@ class Login extends React.Component {
         break;
     }
     this.setState({errors,[name]:value})
+  }
+
+  handleSubmit = async() =>{
+    const {login} = this.props;
+    let {email,password} = this.state
+    let userData = {
+      email: email,
+      password: password
+    }
+    console.log(userData);
+    fetch(BASE_URL,
+      {
+        method:'Post',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(userData)
+      }
+    ).then(response => response.json())
+    .then(data => login(data))
   }
 
   validateForm = () => {
@@ -61,10 +81,11 @@ class Login extends React.Component {
           value = {password}
           onChange = {event => this.handleChange(event)}
           />
-          <Link to = "/" >
-          <button
+          <Link to="/">
+            <button
             disabled = {!isEnabled}
-          >Login</button>
+            onClick = {this.handleSubmit}
+            >Login</button>
           </Link>
         </form>
     )
