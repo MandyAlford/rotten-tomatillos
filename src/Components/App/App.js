@@ -24,10 +24,15 @@ class App extends Component {
       .then(movies => this.setState({ movies: movies.movies }))
   };
   login = (userData) => {
-    this.setState({...userData})
+    this.setState({...userData,show:false})
+  }
+
+  logout = () => {
+    this.setState({user:{name:"",id:null,email:""}})
   }
 
   showModal = e => {
+    e.preventDefault();
     let updatedState = !this.state.show
     this.setState({show:updatedState})
   }
@@ -35,14 +40,18 @@ class App extends Component {
   render() {
     return (
       <>
-          <button  onClick={e => {
-              this.showModal();
-              }}
-          > Login </button>
+        {
+          this.state.user.name!==""?
+          <button  onClick={e => {this.logout(e);}}>
+            Sign Out
+          </button>
+          :<button  onClick={e => {this.showModal(e);}}>
+            Sign In
+          </button>
+        }
+
         <Route path='/' exact>
           <Login login = {this.login} show = {this.state.show}/>
-        </Route>
-        <Route path='/' exact>
           <MoviesContainer movies={this.state.movies} />
         </Route>
 
