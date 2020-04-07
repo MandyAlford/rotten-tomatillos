@@ -13,7 +13,8 @@ class App extends Component {
         name:"",
         id:null,
         email:""
-      }
+      },
+      show:false
     };
   };
 
@@ -25,17 +26,26 @@ class App extends Component {
   login = (userData) => {
     this.setState({...userData})
   }
+
+  showModal = e => {
+    let updatedState = !this.state.show
+    this.setState({show:updatedState})
+  }
+
   render() {
     return (
       <>
-        <Link to = '/Login'>Login</Link>
+          <button  onClick={e => {
+              this.showModal();
+              }}
+          > Login </button>
+        <Route path='/' exact>
+          <Login login = {this.login} show = {this.state.show}/>
+        </Route>
         <Route path='/' exact>
           <MoviesContainer movies={this.state.movies} />
         </Route>
 
-        <Route path='/Login' exact>
-          <Login login = {this.login}/>
-        </Route>
       </>
     );
   };
