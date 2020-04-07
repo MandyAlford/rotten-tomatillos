@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
-import MoviesContainer from '../MoviesContainer/MoviesContainer'
+import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import MovieDetails from '../MovieDetails/MovieDetails';
 
 class App extends Component {
   constructor() {
@@ -17,11 +18,24 @@ class App extends Component {
       .then(movies => this.setState({ movies: movies.movies }))
   };
 
+  showMovieDetails =(e) => {
+    debugger
+  }
+
   render() {
     return (
-    <Route path='/' exact>
-      <MoviesContainer movies={this.state.movies} />
-    </Route>
+    <div>
+      <Route path='/' exact>
+        <MoviesContainer
+        movies={this.state.movies}
+        showMovieDetails={this.showMovieDetails}
+        />
+      </Route>
+
+      <Route path='/movies/:movie.id' exact>
+        <MovieDetails />
+      </Route>
+    </div>
     );
   };
 };

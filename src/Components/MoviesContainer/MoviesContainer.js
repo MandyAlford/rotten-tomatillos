@@ -1,11 +1,13 @@
 import React from 'react';
 import MovieCard from '../MovieCard/MovieCard'
 import './MoviesContainer.css';
+import MovieDetails from '../MovieDetails/MovieDetails';
 
-const MoviesContainer = ({ movies }) => {
+
+const MoviesContainer = ({ movies, showMovieDetails }) => {
   const cards = movies.map(movie => {
     return (
-      <MovieCard 
+      <MovieCard
         key={movie.id}
         title={movie.title}
         poster_path={movie.poster_path}
@@ -13,6 +15,8 @@ const MoviesContainer = ({ movies }) => {
         release_date={movie.release_date}
         overview={movie.overview}
         average_rating={movie.average_rating}
+        showMovieDetails={showMovieDetails}
+        id={movie.id}
       />
     );
   });
