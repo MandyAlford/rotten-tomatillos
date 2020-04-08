@@ -4,19 +4,12 @@ import './MoviesContainer.css';
 import MovieDetails from '../MovieDetails/MovieDetails';
 
 
-const MoviesContainer = ({ movies, showMovieDetails }) => {
+const MoviesContainer = ({ movies }) => {
   const cards = movies.map(movie => {
     return (
       <MovieCard
         key={movie.id}
-        title={movie.title}
-        poster_path={movie.poster_path}
-        backdrop_path={movie.backdrop_path}
-        release_date={movie.release_date}
-        overview={movie.overview}
-        average_rating={movie.average_rating}
-        showMovieDetails={showMovieDetails}
-        id={movie.id}
+        movie={movie}
       />
     );
   });

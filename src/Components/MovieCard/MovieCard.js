@@ -1,14 +1,15 @@
 import React from 'react';
-import './MovieCard.css'
+import './MovieCard.css';
+import { Link } from 'react-router-dom';
 
-const MovieCard = ({ title, poster_path, average_rating, showMovieDetails, id, backdrop_path, release_date, overview,  }) => {
+const MovieCard = ({ movie }) => {
   return(
-    <div onClick={showMovieDetails} id={id}>
-    <link to{`/movies/${id}`}>
-      <h2>{title}</h2>
-      <img src={poster_path}></img>
-      <p>{average_rating}</p>
-    </link>
+    <div>
+    <Link to={`/movies/${movie.id}`}>
+      <h2>{movie.title}</h2>
+      <img src={movie.poster_path}></img>
+      <p>{movie.average_rating}</p>
+    </Link>
     </div>
   );
 };

@@ -18,22 +18,16 @@ class App extends Component {
       .then(movies => this.setState({ movies: movies.movies }))
   };
 
-  showMovieDetails =(e) => {
-    debugger
-  }
-
   render() {
     return (
     <div>
       <Route path='/' exact>
         <MoviesContainer
         movies={this.state.movies}
-        showMovieDetails={this.showMovieDetails}
         />
       </Route>
 
-      <Route path='/movies/:movie.id' exact>
-        <MovieDetails />
+      <Route path='/movies/:movie_id' exact component={MovieDetails}>
       </Route>
     </div>
     );
