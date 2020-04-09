@@ -22,8 +22,8 @@ class MovieDetails extends Component {
       {this.state.movie &&
         <div>
           <h2>{this.state.movie.title}</h2>
-          <img src={this.state.movie.poster_path}/>
-          <img src={this.state.movie.backdrop_path}/>
+          <img src={this.state.movie.poster_path} alt= {`${this.state.movie.title} movie poster`}/>
+          <img src={this.state.movie.backdrop_path} alt={`${this.state.movie.title} movie backdrop`}/>
           <p>{this.state.movie.release_date}</p>
           <p>{this.state.movie.overview}</p>
           <p>{this.state.movie.average_rating}</p>
