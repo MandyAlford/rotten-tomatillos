@@ -20,7 +20,7 @@ describe("Movie Card", () => {
       </BrowserRouter>
     );
     const title = getByText("The Coma");
-    const rating = getByText("4");
+    const rating = getByText("4.0");
     const rating2 = getByText("out of 10");
     expect(title).toBeInTheDocument();
     expect(rating).toBeInTheDocument();
