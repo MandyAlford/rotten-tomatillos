@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
+import { connect } from "react-redux";
+import {bindActionCreators} from 'redux';
 import "./App.css";
 import Login from "../Login/Login";
 import MoviesContainer from "../MoviesContainer/MoviesContainer";
 import Header from "../Header/Header";
 import MovieDetails from '../MovieDetails/MovieDetails';
+import {showModal} from '../../actions'
 
 class App extends Component {
   constructor() {
@@ -16,7 +19,7 @@ class App extends Component {
         id: null,
         email: "",
       },
-      show: false,
+      showLoginModal: false,
     };
   }
 
@@ -25,18 +28,9 @@ class App extends Component {
       .then((response) => response.json())
       .then((movies) => this.setState({ movies: movies.movies }));
   };
-  login = (userData) => {
-    this.setState({ ...userData, show: false });
-  };
 
   logout = () => {
     this.setState({ user: { name: "", id: null, email: "" } });
-  };
-
-  showModal = (e) => {
-    e.preventDefault();
-    let updatedState = !this.state.show;
-    this.setState({ show: updatedState });
   };
 
   render() {
@@ -44,11 +38,8 @@ class App extends Component {
     <div>
       <Route path='/' exact>
         <Header
-          logout={this.logout}
-          showModal={this.showModal}
-          user={this.state.user}
         />
-        <Login login={this.login} show={this.state.show} />
+        <Login login={this.login} showLoginModal={this.state.showLoginModal} />
         <MoviesContainer
         movies={this.state.movies}
         />
@@ -61,4 +52,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({user,showLoginModal}) => ({
+  user,
+  showLoginModal
+});
+
+const mapDispatchToProps = dispatch => ( bindActionCreators({showModal},dispatch));
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
