@@ -34,4 +34,15 @@
   text-transform: uppercase;
   cursor: pointer;
   outline: none;
+  margin-left: 2em;
+}
+
+.greeting-btn-container {
+  display: flex;
+}
+
+.greeting {
+  align-self: center;
+  font-size: 1.4em;
+  margin-bottom: 0.3em;
 }

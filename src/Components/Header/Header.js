@@ -14,14 +14,17 @@ const Header = ({ logout, showModal, user,show }) => {
         <h1 className="nav-title">Rancid Tomatillos</h1>
       </div>
       {user.name !== "" ? (
-        <button
-          className="nav-btn"
-          onClick={(e) => {
-            logout();
-          }}
-        >
-          Sign Out
-        </button>
+        <div className="greeting-btn-container">
+          <div className="greeting">Hello, {user.name}</div>
+          <button
+            className="nav-btn"
+            onClick={(e) => {
+              logout();
+            }}
+          >
+            Sign Out
+          </button>
+        </div>
       ) : (
         <button
           className="nav-btn"
