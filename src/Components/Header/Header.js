@@ -5,7 +5,7 @@ import {showModal,logout} from '../../actions';
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
 
-export const Header = ({ logout, showModal, user,show }) => {
+export const Header = ({ logout, showModal, user,showLoginModal }) => {
   return (
     <div className="header">
       <div className="logo-nav">
@@ -39,9 +39,9 @@ export const Header = ({ logout, showModal, user,show }) => {
   );
 };
 
-const mapStateToProps = ({user,show}) => ({
+const mapStateToProps = ({user,showLoginModal}) => ({
   user,
-  show
+  showLoginModal
 });
 
 const mapDispatchToProps = dispatch => ( bindActionCreators({showModal,logout},dispatch));

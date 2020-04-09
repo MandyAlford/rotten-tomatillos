@@ -21,7 +21,7 @@ describe("Login", () => {
     });
     const { getByPlaceholderText, getByText, getByLabelText } = render(
         <BrowserRouter>
-          <Login login={mockLogin} show={true} showModal = {mockShowModal}/>
+          <Login login={mockLogin} showLoginModal={true} showModal = {mockShowModal}/>
         </BrowserRouter>
     );
 
@@ -51,7 +51,7 @@ describe("Login", () => {
     });
     const { getByPlaceholderText, getByText, getByLabelText } = render(
         <BrowserRouter>
-          <Login login={mockLogin} show={true} showModal = {mockShowModal}/>
+          <Login login={mockLogin} showLoginModal={true} showModal = {mockShowModal}/>
         </BrowserRouter>
     );
 

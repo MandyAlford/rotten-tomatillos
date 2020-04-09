@@ -62,7 +62,7 @@ export class Login extends React.Component {
   render() {
     const { email, password, errors } = this.state;
     let isEnabled = this.validateForm();
-    if (!this.props.show) {
+    if (!this.props.showLoginModal) {
       return null;
     }
     return (
@@ -101,8 +101,8 @@ export class Login extends React.Component {
   }
 }
 
-const mapStateToProps = ({ show }) => ({
-  show
+const mapStateToProps = ({ showLoginModal }) => ({
+  showLoginModal
 });
 
 const mapDispatchToProps = dispatch =>

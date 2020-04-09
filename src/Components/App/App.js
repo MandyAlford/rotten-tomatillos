@@ -19,7 +19,7 @@ class App extends Component {
         id: null,
         email: "",
       },
-      show: false,
+      showLoginModal: false,
     };
   }
 
@@ -33,19 +33,13 @@ class App extends Component {
     this.setState({ user: { name: "", id: null, email: "" } });
   };
 
-  // showModal = (e) => {
-  //   e.preventDefault();
-  //   let updatedState = !this.state.show;
-  //   this.setState({ show: updatedState });
-  // };
-
   render() {
     return (
     <div>
       <Route path='/' exact>
         <Header
         />
-        <Login login={this.login} show={this.state.show} />
+        <Login login={this.login} showLoginModal={this.state.showLoginModal} />
         <MoviesContainer
         movies={this.state.movies}
         />
@@ -58,9 +52,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({user,show}) => ({
+const mapStateToProps = ({user,showLoginModal}) => ({
   user,
-  show
+  showLoginModal
 });
 
 const mapDispatchToProps = dispatch => ( bindActionCreators({showModal},dispatch));

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { user } from './user';
-import { show } from './show';
+import { showLoginModal } from './showLoginModal';
 
 export const rootReducer = combineReducers({
   user,
-  show
+  showLoginModal
 })
