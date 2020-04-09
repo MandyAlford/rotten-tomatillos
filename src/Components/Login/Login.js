@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
-import { fetchUserLogin } from "../../ApiCalls/ApiCalls";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import {bindActionCreators} from 'redux';
+import { fetchUserLogin } from "../../ApiCalls/ApiCalls";
+import {login} from '../../actions'
 import "./Login.css";
+
 
 const validEmailRegex = RegExp(
   // eslint-disable-next-line
@@ -96,4 +100,6 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => ( bindActionCreators({login},dispatch));
+
+export default connect(null, mapDispatchToProps)(Login)
