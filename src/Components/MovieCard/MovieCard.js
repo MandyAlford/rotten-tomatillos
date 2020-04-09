@@ -2,26 +2,26 @@ import React from "react";
 import "./MovieCard.css";
 import { Link } from "react-router-dom";
 
-const MovieCard = ({ title, poster_path, average_rating, id }) => {
+const MovieCard = ({ movie }) => {
   return (
     <Link
-      to={"/movies/" + id}
+      to={"/movies/"+ movie.id}
       className="movie-card"
       style={{
-        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1)), url(${poster_path})`,
+        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1)), url(${movie.poster_path})`,
         "background-size": "cover",
       }}
     >
       <div className="title-rating-container">
-        <h2 className="movie-card-title">{title}</h2>
+        <h2 className="movie-card-title">{movie.title}</h2>
         <p className="movie-card-rating">
           <span className="rating-score">
-            {average_rating >= 5 ? (
+            {movie.average_rating >= 5 ? (
               <i class="fas fa-smile"></i>
             ) : (
               <i class="fas fa-meh"></i>
             )}
-            {average_rating}
+            {movie.average_rating}
           </span>{" "}
           out of 10
         </p>
