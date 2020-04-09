@@ -16,4 +16,5 @@ const MoviesContainer = ({ movies }) => {
   return <div className="cards-container">{cards}</div>;
 };
 
+
 export default MoviesContainer;

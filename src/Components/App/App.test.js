@@ -4,6 +4,17 @@ import App from './App';
 import "@testing-library/jest-dom";
 import { BrowserRouter } from "react-router-dom";
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { rootReducer } from '../../reducers';
+const store = createStore(rootReducer);
+
 test('renders learn react link', () => {
-  const { getByText } = render(<BrowserRouter><App /></BrowserRouter>);
+      const store = createStore(rootReducer);
+  const { getByText } = render(
+<Provider store={store}>
+  <BrowserRouter><App /></BrowserRouter>
+
+</Provider>
+  );
 });
