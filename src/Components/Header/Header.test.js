@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 describe("header", () => {
@@ -14,7 +14,7 @@ describe("header", () => {
 
   it("should fire correct function when log out button clicked", () => {
     const mockLogOut = jest.fn();
-    const { getByText, debug } = render(
+    const { getByText } = render(
       <Header
         user={{
           name: "Ed",
