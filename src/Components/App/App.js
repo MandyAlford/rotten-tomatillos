@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route,Link } from 'react-router-dom';
 import './App.css';
+import Login from '../Login/Login';
 import MoviesContainer from '../MoviesContainer/MoviesContainer'
 
 class App extends Component {
@@ -8,6 +9,12 @@ class App extends Component {
     super();
     this.state = {
       movies: [],
+      user: {
+        name:"",
+        id:null,
+        email:""
+      },
+      show:false
     };
   };
 
@@ -16,12 +23,39 @@ class App extends Component {
       .then(response => response.json())
       .then(movies => this.setState({ movies: movies.movies }))
   };
+  login = (userData) => {
+    this.setState({...userData,show:false})
+  }
+
+  logout = () => {
+    this.setState({user:{name:"",id:null,email:""}})
+  }
+
+  showModal = e => {
+    e.preventDefault();
+    let updatedState = !this.state.show
+    this.setState({show:updatedState})
+  }
 
   render() {
     return (
-    <Route path='/' exact>
-      <MoviesContainer movies={this.state.movies} />
-    </Route>
+      <>
+        {
+          this.state.user.name!==""?
+          <button  onClick={e => {this.logout(e);}}>
+            Sign Out
+          </button>
+          :<button  onClick={e => {this.showModal(e);}}>
+            Sign In
+          </button>
+        }
+
+        <Route path='/' exact>
+          <Login login = {this.login} show = {this.state.show}/>
+          <MoviesContainer movies={this.state.movies} />
+        </Route>
+
+      </>
     );
   };
 };
