@@ -4,6 +4,7 @@ import "./App.css";
 import Login from "../Login/Login";
 import MoviesContainer from "../MoviesContainer/MoviesContainer";
 import Header from "../Header/Header";
+import MovieDetails from '../MovieDetails/MovieDetails';
 
 class App extends Component {
   constructor() {
@@ -40,17 +41,22 @@ class App extends Component {
 
   render() {
     return (
-      <>
-        <Route path="/" exact>
-          <Header
-            logout={this.logout}
-            showModal={this.showModal}
-            user={this.state.user}
-          />
-          <Login login={this.login} show={this.state.show} />
-          <MoviesContainer movies={this.state.movies} />
-        </Route>
-      </>
+    <div>
+      <Route path='/' exact>
+        <Header
+          logout={this.logout}
+          showModal={this.showModal}
+          user={this.state.user}
+        />
+        <Login login={this.login} show={this.state.show} />
+        <MoviesContainer
+        movies={this.state.movies}
+        />
+      </Route>
+
+      <Route path='/movies/:movie_id' exact component={MovieDetails}>
+      </Route>
+    </div>
     );
   }
 }
