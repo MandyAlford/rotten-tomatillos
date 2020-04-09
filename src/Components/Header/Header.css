@@ -1,0 +1,37 @@
+.header {
+  padding: 1.5em 2em;
+  display: flex;
+  justify-content: space-between;
+  background: #eaeaea;
+}
+
+.nav-tomato {
+  height: 3em;
+}
+
+.logo-nav {
+  display: flex;
+}
+
+.nav-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5em;
+  margin-top: 0.05em;
+}
+
+.nav-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 0.2em;
+  font-size: 1em;
+  background-color: #eaeaea;
+  color: black;
+  text-decoration: none;
+  padding: 1em;
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+}
