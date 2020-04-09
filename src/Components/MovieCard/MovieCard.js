@@ -9,6 +9,7 @@ const MovieCard = ({ title, poster_path, average_rating, id }) => {
       className="movie-card"
       style={{
         background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1)), url(${poster_path})`,
+        backgroundSize: "cover",
       }}
     >
       <div className="title-rating-container">
@@ -20,7 +21,7 @@ const MovieCard = ({ title, poster_path, average_rating, id }) => {
             ) : (
               <i className="fas fa-meh"></i>
             )}
-            {average_rating}
+            {average_rating.toFixed(1)}
           </span>{" "}
           out of 10
         </p>
