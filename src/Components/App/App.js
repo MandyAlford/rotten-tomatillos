@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import './App.css';
-import MoviesContainer from '../MoviesContainer/MoviesContainer'
+import React, { Component } from "react";
+import { Route } from "react-router-dom";
+import "./App.css";
+import MoviesContainer from "../MoviesContainer/MoviesContainer";
+import Header from "../Header/Header";
 
 class App extends Component {
   constructor() {
@@ -9,21 +10,22 @@ class App extends Component {
     this.state = {
       movies: [],
     };
-  };
+  }
 
   componentDidMount = () => {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v1/movies')
-      .then(response => response.json())
-      .then(movies => this.setState({ movies: movies.movies }))
+    fetch("https://rancid-tomatillos.herokuapp.com/api/v1/movies")
+      .then((response) => response.json())
+      .then((movies) => this.setState({ movies: movies.movies }));
   };
 
   render() {
     return (
-    <Route path='/' exact>
-      <MoviesContainer movies={this.state.movies} />
-    </Route>
+      <Route path="/" exact>
+        <Header />
+        <MoviesContainer movies={this.state.movies} />
+      </Route>
     );
-  };
-};
+  }
+}
 
 export default App;
