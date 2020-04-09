@@ -1,8 +1,11 @@
 import React from "react";
 import "./Header.css";
 import tomato from "../../assets/tomato.png";
+import {showModal} from '../../actions';
+import { connect } from "react-redux";
+import {bindActionCreators} from 'redux';
 
-const Header = ({ logout, showModal, user }) => {
+const Header = ({ logout, showModal, user,show }) => {
   return (
     <div className="header">
       <div className="logo-nav">
@@ -23,7 +26,7 @@ const Header = ({ logout, showModal, user }) => {
         <button
           className="nav-btn"
           onClick={(e) => {
-            showModal(e);
+            showModal(true);
           }}
         >
           Sign In
@@ -33,4 +36,10 @@ const Header = ({ logout, showModal, user }) => {
   );
 };
 
-export default Header;
+const mapStateToProps = ({show}) => ({
+  show
+});
+
+const mapDispatchToProps = dispatch => ( bindActionCreators({showModal},dispatch));
+
+export default connect(mapStateToProps,mapDispatchToProps)(Header);

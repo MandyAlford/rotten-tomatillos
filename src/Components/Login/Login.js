@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {bindActionCreators} from 'redux';
 import { fetchUserLogin } from "../../ApiCalls/ApiCalls";
-import {login} from '../../actions'
+import {login} from '../../actions';
+import {showModal} from '../../actions';
 import "./Login.css";
 
 
@@ -37,7 +38,7 @@ class Login extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { login } = this.props;
+    const { login,showModal } = this.props;
     let { email, password } = this.state;
     let userData = {
       email: email,
@@ -47,7 +48,9 @@ class Login extends React.Component {
     if (data.error) {
       this.setState({ email: "", password: "" });
     } else {
+      console.log(data);
       login(data);
+      showModal(false);
     }
   };
 
@@ -100,6 +103,10 @@ class Login extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({login},dispatch));
+const mapStateToProps = ({show}) => ({
+  show
+});
 
-export default connect(null, mapDispatchToProps)(Login)
+const mapDispatchToProps = dispatch => ( bindActionCreators({login,showModal},dispatch));
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
