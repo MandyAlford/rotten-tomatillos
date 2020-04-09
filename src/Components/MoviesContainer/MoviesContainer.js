@@ -5,7 +5,7 @@ import MovieDetails from '../MovieDetails/MovieDetails';
 
 
 const MoviesContainer = ({ movies }) => {
-  const cards = movies.map(movie => {
+  const cards = movies.map((movie) => {
     return (
       <MovieCard
         key={movie.id}
@@ -13,11 +13,7 @@ const MoviesContainer = ({ movies }) => {
       />
     );
   });
-  return(
-    <div className='cards-container'>
-      { cards }
-    </div>
-  );
+  return <div className="cards-container">{cards}</div>;
 };
 
 export default MoviesContainer;
