@@ -5,7 +5,7 @@ import {showModal,logout} from '../../actions';
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
 
-const Header = ({ logout, showModal, user,show }) => {
+export const Header = ({ logout, showModal, user,show }) => {
   return (
     <div className="header">
       <div className="logo-nav">
