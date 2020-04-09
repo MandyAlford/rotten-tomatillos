@@ -9,7 +9,6 @@ const MovieCard = ({ title, poster_path, average_rating, id }) => {
       className="movie-card"
       style={{
         background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1)), url(${poster_path})`,
-        "background-size": "cover",
       }}
     >
       <div className="title-rating-container">
@@ -17,9 +16,9 @@ const MovieCard = ({ title, poster_path, average_rating, id }) => {
         <p className="movie-card-rating">
           <span className="rating-score">
             {average_rating >= 5 ? (
-              <i class="fas fa-smile"></i>
+              <i className="fas fa-smile"></i>
             ) : (
-              <i class="fas fa-meh"></i>
+              <i className="fas fa-meh"></i>
             )}
             {average_rating}
           </span>{" "}
