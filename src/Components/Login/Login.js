@@ -16,12 +16,12 @@ class Login extends React.Component {
       email: "greg@turing.io",
       password: "abc123",
       errors: {
-        email: ""
-      }
+        email: "",
+      },
     };
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
     let errors = this.state.errors;
@@ -37,9 +37,9 @@ class Login extends React.Component {
     let { email, password } = this.state;
     let userData = {
       email: email,
-      password: password
+      password: password,
     };
-    let data = await fetchUserLogin(userData)
+    let data = await fetchUserLogin(userData);
     if (data.error) {
       this.setState({ email: "", password: "" });
     } else {
@@ -61,27 +61,36 @@ class Login extends React.Component {
       return null;
     }
     return (
-      <div className="modal">
-        <form>
-          <span>{errors.email}</span>
-          <input
-            type="text"
-            placeholder="email@provider.com"
-            name="email"
-            value={email}
-            onChange={event => this.handleChange(event)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={event => this.handleChange(event)}
-          />
-          <button disabled={!isEnabled} onClick={this.handleSubmit}>
-            Login
-          </button>
-        </form>
+      <div className="login">
+        <div className="modal">
+          <div className="login-wrapper">
+            <form>
+              <span>{errors.email}</span>
+              <input
+                type="text"
+                placeholder="email@provider.com"
+                name="email"
+                value={email}
+                onChange={(event) => this.handleChange(event)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={password}
+                onChange={(event) => this.handleChange(event)}
+              />
+              <button
+                disabled={!isEnabled}
+                onClick={this.handleSubmit}
+                className="submit-btn"
+              >
+                Log in
+              </button>
+            </form>
+          </div>
+        </div>
+        <div className="mask"></div>
       </div>
     );
   }

@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { Route,Link } from 'react-router-dom';
-import './App.css';
-import Login from '../Login/Login';
-import MoviesContainer from '../MoviesContainer/MoviesContainer'
+import React, { Component } from "react";
+import { Route, Link } from "react-router-dom";
+import "./App.css";
+import Login from "../Login/Login";
+import MoviesContainer from "../MoviesContainer/MoviesContainer";
+import Header from "../Header/Header";
 
 class App extends Component {
   constructor() {
@@ -10,54 +11,48 @@ class App extends Component {
     this.state = {
       movies: [],
       user: {
-        name:"",
-        id:null,
-        email:""
+        name: "",
+        id: null,
+        email: "",
       },
-      show:false
+      show: false,
     };
-  };
+  }
 
   componentDidMount = () => {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v1/movies')
-      .then(response => response.json())
-      .then(movies => this.setState({ movies: movies.movies }))
+    fetch("https://rancid-tomatillos.herokuapp.com/api/v1/movies")
+      .then((response) => response.json())
+      .then((movies) => this.setState({ movies: movies.movies }));
   };
   login = (userData) => {
-    this.setState({...userData,show:false})
-  }
+    this.setState({ ...userData, show: false });
+  };
 
   logout = () => {
-    this.setState({user:{name:"",id:null,email:""}})
-  }
+    this.setState({ user: { name: "", id: null, email: "" } });
+  };
 
-  showModal = e => {
+  showModal = (e) => {
     e.preventDefault();
-    let updatedState = !this.state.show
-    this.setState({show:updatedState})
-  }
+    let updatedState = !this.state.show;
+    this.setState({ show: updatedState });
+  };
 
   render() {
     return (
       <>
-        {
-          this.state.user.name!==""?
-          <button  onClick={e => {this.logout(e);}}>
-            Sign Out
-          </button>
-          :<button  onClick={e => {this.showModal(e);}}>
-            Sign In
-          </button>
-        }
-
-        <Route path='/' exact>
-          <Login login = {this.login} show = {this.state.show}/>
+        <Route path="/" exact>
+          <Header
+            logout={this.logout}
+            showModal={this.showModal}
+            user={this.state.user}
+          />
+          <Login login={this.login} show={this.state.show} />
           <MoviesContainer movies={this.state.movies} />
         </Route>
-
       </>
     );
-  };
-};
+  }
+}
 
 export default App;

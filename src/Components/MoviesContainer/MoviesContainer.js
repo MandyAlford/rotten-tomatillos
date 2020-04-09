@@ -1,12 +1,13 @@
-import React from 'react';
-import MovieCard from '../MovieCard/MovieCard'
-import './MoviesContainer.css';
+import React from "react";
+import MovieCard from "../MovieCard/MovieCard";
+import "./MoviesContainer.css";
 
 const MoviesContainer = ({ movies }) => {
-  const cards = movies.map(movie => {
+  const cards = movies.map((movie) => {
     return (
-      <MovieCard 
+      <MovieCard
         key={movie.id}
+        id={movie.id}
         title={movie.title}
         poster_path={movie.poster_path}
         backdrop_path={movie.backdrop_path}
@@ -16,11 +17,7 @@ const MoviesContainer = ({ movies }) => {
       />
     );
   });
-  return(
-    <div className='cards-container'>
-      { cards }
-    </div>
-  );
+  return <div className="cards-container">{cards}</div>;
 };
 
 export default MoviesContainer;
