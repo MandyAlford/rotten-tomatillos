@@ -5,11 +5,21 @@ import "@testing-library/jest-dom";
 
 describe("header", () => {
   it("should render the text we expect", () => {
-    const { getByText } = render(<Header user={"Ed"} />);
+    const { getByText } = render(
+      <Header
+        user={{
+          name: "Ed",
+          id: 2,
+          email: "ed@ed.com",
+        }}
+      />
+    );
     const title = getByText("Rancid Tomatillos");
     const signOut = getByText("Sign Out");
+    const greeting = getByText("Hello, Ed");
     expect(title).toBeInTheDocument();
     expect(signOut).toBeInTheDocument();
+    expect(greeting).toBeInTheDocument();
   });
 
   it("should fire correct function when log out button clicked", () => {
