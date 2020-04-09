@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from "redux";
 import { fetchUserLogin } from "../../ApiCalls/ApiCalls";
-import {login} from '../../actions';
-import {showModal} from '../../actions';
+import { login } from "../../actions";
+import { showModal } from "../../actions";
 import "./Login.css";
-
 
 const validEmailRegex = RegExp(
   // eslint-disable-next-line
@@ -21,12 +20,12 @@ class Login extends React.Component {
       email: "greg@turing.io",
       password: "abc123",
       errors: {
-        email: "",
-      },
+        email: ""
+      }
     };
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     event.preventDefault();
     const { name, value } = event.target;
     let errors = this.state.errors;
@@ -36,19 +35,18 @@ class Login extends React.Component {
     this.setState({ errors, [name]: value });
   };
 
-  handleSubmit = async (event) => {
+  handleSubmit = async event => {
     event.preventDefault();
-    const { login,showModal } = this.props;
+    const { login, showModal } = this.props;
     let { email, password } = this.state;
     let userData = {
       email: email,
-      password: password,
+      password: password
     };
     let data = await fetchUserLogin(userData);
     if (data.error) {
       this.setState({ email: "", password: "" });
     } else {
-      console.log(data);
       login(data);
       showModal(false);
     }
@@ -78,14 +76,14 @@ class Login extends React.Component {
                 placeholder="email@provider.com"
                 name="email"
                 value={email}
-                onChange={(event) => this.handleChange(event)}
+                onChange={event => this.handleChange(event)}
               />
               <input
                 type="password"
                 placeholder="Password"
                 name="password"
                 value={password}
-                onChange={(event) => this.handleChange(event)}
+                onChange={event => this.handleChange(event)}
               />
               <button
                 disabled={!isEnabled}
@@ -103,10 +101,14 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = ({show}) => ({
+const mapStateToProps = ({ show }) => ({
   show
 });
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({login,showModal},dispatch));
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ login, showModal }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

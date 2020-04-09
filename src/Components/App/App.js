@@ -44,8 +44,6 @@ class App extends Component {
     <div>
       <Route path='/' exact>
         <Header
-          logout={this.logout}chr
-          user={this.state.user}
         />
         <Login login={this.login} show={this.state.show} />
         <MoviesContainer
