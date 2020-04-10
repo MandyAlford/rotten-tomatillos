@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 const MovieCard = ({ movie }) => {
   return (
     <Link
-      to={"/movies/"+ movie.id}
+      to={"/movies/" + movie.id}
       className="movie-card"
       style={{
         background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1)), url(${movie.poster_path})`,
-        "backgroundSize": "cover",
+        backgroundSize: "cover",
       }}
     >
       <div className="title-rating-container">
@@ -21,7 +21,7 @@ const MovieCard = ({ movie }) => {
             ) : (
               <i className="fas fa-meh"></i>
             )}
-            {movie.average_rating}
+            {movie.average_rating.toFixed(1)}
           </span>{" "}
           out of 10
         </p>
