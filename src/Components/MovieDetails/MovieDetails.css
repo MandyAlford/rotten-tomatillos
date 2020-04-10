@@ -1,0 +1,41 @@
+.movie-detail-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid black;
+  height: 500px;
+}
+
+.movie-detail-backdrop {
+  background-position: center;
+  background-size: cover;
+  height: 500px;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  opacity: .3;
+}
+
+.movie-detail-poster {
+  width: 270px;
+  height: 390px;
+  border-radius: 0.3em;
+  opacity: 20;
+  margin: 40px;
+  box-shadow: 10px 10px 10px rgba(30, 30, 30, 0.7);
+}
+
+.movie-detail-title {
+  text-decoration: underline;
+}
+
+.movie-detail-release {
+  padding-bottom: 50px;
+}
+
+.movie-detail-overview {
+  padding-bottom: 50px;
+  padding-right: 40px;
+}
+
+
