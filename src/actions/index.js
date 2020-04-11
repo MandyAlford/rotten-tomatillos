@@ -12,11 +12,7 @@ export const showModal = (isShowing) => ({
   isShowing: isShowing,
 });
 
-export const getUserRatings = (ratings) => {
-  console.log(ratings)
-  debugger
-  return ({
+export const getUserRatings = (ratings) => ({
       type: "GET_USER_RATINGS",
       ratings,
     });
-}
