@@ -16,12 +16,7 @@ export const Header = ({ logout, showModal, user }) => {
       {user.name !== "" ? (
         <div className="greeting-btn-container">
           <div className="greeting">Hello, {user.name}</div>
-          <button
-            className="nav-btn"
-            onClick={(e) => {
-              logout();
-            }}
-          >
+          <button className="nav-btn" onClick={() => logout()}>
             Sign Out
           </button>
         </div>
