@@ -1,6 +1,6 @@
-export const login = (userData) => ({
+export const login = (user) => ({
   type: "LOGIN_USER",
-  user: userData.user,
+  user,
 });
 
 export const logout = () => ({
@@ -20,8 +20,4 @@ export const getUserRatings = (ratings) => ({
 export const getMovies = (movies) => ({
   type: "GET_MOVIES",
   movies,
-});
-
-export const clearRatings = () => ({
-  type: "CLEAR_RATINGS",
 });
