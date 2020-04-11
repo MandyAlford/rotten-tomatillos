@@ -6,7 +6,8 @@ describe("Reducer: showLoginModal", () => {
     const expected = {
       name: "",
       id: null,
-      email: ""
+      email: "",
+      ratings: [],
     };
 
     // Execution
@@ -21,12 +22,12 @@ describe("Reducer: showLoginModal", () => {
     const expected = {
       name: "greg",
       id: 1,
-      email: "greg@turing.io"
+      email: "greg@turing.io",
     };
     const mockUserData = {
       name: "greg",
       id: 1,
-      email: "greg@turing.io"
+      email: "greg@turing.io",
     };
     const action = { type: "LOGIN_USER", user: mockUserData };
 
@@ -41,12 +42,13 @@ describe("Reducer: showLoginModal", () => {
     const expected = {
       name: "",
       id: null,
-      email: ""
+      email: "",
+      ratings: [],
     };
     const mockUserData = {
       name: "greg",
       id: 1,
-      email: "greg@turing.io"
+      email: "greg@turing.io",
     };
 
     // Execution
