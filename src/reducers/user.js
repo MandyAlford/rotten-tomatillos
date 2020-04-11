@@ -6,7 +6,7 @@ const defaultState = {
 export const user = (state = defaultState, action) => {
   switch (action.type) {
     case "LOGIN_USER":
-      return action.userData.user;
+      return action.user;
     case "LOGOUT_USER":
       return defaultState;
     default:
