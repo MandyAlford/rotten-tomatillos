@@ -71,7 +71,7 @@ export class Login extends React.Component {
       <div className="login">
         <div className="modal">
           <div className="login-wrapper">
-            <form>
+            <form aria-label="Login Form">
               <span>{errors.email}</span>
               <input
                 type="text"
@@ -91,6 +91,7 @@ export class Login extends React.Component {
                 disabled={!isEnabled}
                 onClick={this.handleSubmit}
                 className="submit-btn"
+                aria-label = "Submit Log In Form"
               >
                 Log in
               </button>
