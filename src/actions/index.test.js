@@ -35,4 +35,15 @@ describe('actions', () => {
 
     expect(result).toEqual(expectedAction)
   });
+
+  it('should have a type of SHOW_MODAL and  correct payload', () => {
+    const expectedAction = {
+      type: "SHOW_MODAL",
+      isShowing: true
+    }
+
+    const result = actions.showModal(true);
+
+    expect(result).toEqual(expectedAction)
+  });
 });
