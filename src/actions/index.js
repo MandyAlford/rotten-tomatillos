@@ -7,14 +7,16 @@ export const logout = () => ({
   type: "LOGOUT_USER",
 });
 
-export const showModal = (isShowing) => {
+export const showModal = (isShowing) => ({
+  type: "SHOW_MODAL",
+  isShowing: isShowing,
+});
+
+export const getUserRatings = (ratings) => {
+  console.log(ratings)
+  debugger
   return ({
-    type: "SHOW_MODAL",
-    isShowing: isShowing,
+    type: "GET_USER_RATINGS",
+    ratings,
   });
 }
-
-export const getUserRatings = (ratings) => ({
-  type: "GET_USER_RATINGS",
-  ratings,
-});
