@@ -9,13 +9,18 @@ describe("Movie Card", () => {
     const { getByText } = render(
       <BrowserRouter>
         <MovieCard
-          key={3}
-          id={3}
-          title={"The Coma"}
-          poster_path={
-            "https://image.tmdb.org/t/p/original//7bjTzPQUV2KVI0HdUjf1l8lUoLF.jpg"
-          }
-          average_rating={4}
+          movie={{
+            id: 36,
+            title: "The Coma",
+            poster_path:
+              "https://image.tmdb.org/t/p/original//7bjTzPQUV2KVI0HdUjf1l8lUoLF.jpg",
+            backdrop_path:
+              "https://image.tmdb.org/t/p/original//j4B8G5yKRnTO655uvpQBXt4Ok08.jpg",
+            release_date: "2020-02-28",
+            overview:
+              "Geiz, Majesty is the first installment of the Kamen Rider Zi-O NEXT TIME series of V-Cinema films for Kamen Rider Zi-O. It focuses on the character Geiz Myokoin.",
+            average_rating: 4,
+          }}
         />
       </BrowserRouter>
     );
