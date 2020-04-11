@@ -5,7 +5,7 @@ import { showModal, logout, clearRatings } from "../../actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-export const Header = ({ logout, showModal, user, clearRatings }) => {
+export const Header = ({ logout, showModal, user }) => {
   return (
     <div className="header">
       <div className="logo-nav">
@@ -20,7 +20,6 @@ export const Header = ({ logout, showModal, user, clearRatings }) => {
             className="nav-btn"
             onClick={(e) => {
               logout();
-              clearRatings();
             }}
           >
             Sign Out
@@ -45,6 +44,6 @@ const mapStateToProps = ({ user }) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ showModal, logout, clearRatings }, dispatch);
+  bindActionCreators({ showModal, logout }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
