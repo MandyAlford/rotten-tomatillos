@@ -2,6 +2,7 @@ export const login = (userData) => ({
   type: "LOGIN_USER",
   user:userData.user,
 });
+
 export const logout = () => ({
   type: "LOGOUT_USER",
 });
@@ -12,6 +13,6 @@ export const showModal = (isShowing) => ({
 });
 
 export const getUserRatings = (ratings) => ({
-  type: "GET_USER_RATINGS",
-  ratings,
-});
+    type: "GET_USER_RATINGS",
+    ratings,
+  });
