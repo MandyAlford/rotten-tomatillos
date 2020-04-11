@@ -11,11 +11,6 @@ export const showModal = (isShowing) => ({
   isShowing: isShowing,
 });
 
-export const rateMovie = (rating) => ({
-  type: "RATE_MOVIE",
-  rating,
-});
-
 export const getUserRatings = (ratings) => ({
   type: "GET_USER_RATINGS",
   ratings,
