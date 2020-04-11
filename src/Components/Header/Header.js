@@ -14,7 +14,7 @@ export const Header = ({ logout, showModal, user,showLoginModal }) => {
         <h1 className="nav-title">Rancid Tomatillos</h1>
       </div>
       {user.name !== "" ? (
-        <div className="greeting-btn-container" aria-label = "">
+        <div className="greeting-btn-container" aria-label = "User Greeting">
           <div className="greeting">Hello, {user.name}</div>
           <button
             aria-label = "Sign Out"
