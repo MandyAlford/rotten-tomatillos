@@ -27,17 +27,23 @@ describe("APP Integration Tests", () => {
     expect(navTitle).toBeInTheDocument();
   });
   describe("Login User Flow",()=>{
-    it("Can Show Modal", () => {
+    let signInBtn,loginForm,emailInput,passwordInput,loginVariables,logInButton
+    beforeEach(()=>{
+      loginVariables = (getByPlaceholderText, getByRole, getByText) =>{
+        signInBtn = getByRole("button", { label: "Sign In" });
+        fireEvent.click(signInBtn);
+        loginForm = getByRole("form", { label: "Login Form" });
+        emailInput = getByPlaceholderText("email@provider.com");
+        passwordInput = getByPlaceholderText("Password");
+        logInButton = getByText("Log in");
+      }
+    })
+    it("Can Show Login Modal", () => {
       //setup
       const { getByPlaceholderText, getByRole, getByText } = render(testWrapper);
 
       //Executions
-      let signInBtn = getByRole("button", { label: "Sign In" });
-      fireEvent.click(signInBtn);
-      let loginForm = getByRole("form", { label: "Login Form" });
-      let emailInput = getByPlaceholderText("email@provider.com");
-      let passwordInput = getByPlaceholderText("Password");
-
+      loginVariables(getByPlaceholderText,getByRole,getByText);
       //assertions
       expect(loginForm).toBeInTheDocument();
       expect(emailInput).toBeInTheDocument();
@@ -47,15 +53,8 @@ describe("APP Integration Tests", () => {
     it("Can Login, Modal Closes, Displays userName in Header", async () => {
       //setup
       const { getByPlaceholderText, getByRole, getByText } = render(testWrapper);
-
       //Executions
-      let signInBtn = getByRole("button", { label: "Sign In" });
-      fireEvent.click(signInBtn);
-      //Once Modal is rendered...grab find all the elements
-      let emailInput = getByPlaceholderText("email@provider.com");
-      let passwordInput = getByPlaceholderText("Password");
-      let logInButton = getByText("Log in");
-      let loginForm = getByRole("form", { label: "Login Form" });
+      loginVariables(getByPlaceholderText,getByRole,getByText);
 
       //Login
       fireEvent.change(getByPlaceholderText("email@provider.com"), {
@@ -72,6 +71,7 @@ describe("APP Integration Tests", () => {
       let userGreeting = getByText("Hello, Greg");
       expect(userGreeting).toBeInTheDocument();
     });
+
     it("Can reject Login, Doesnt close Modal", async () => {
       //setup
       const { getByPlaceholderText, getByRole, getByText } = render(
@@ -79,14 +79,7 @@ describe("APP Integration Tests", () => {
       );
 
       //Executions
-      let signInBtn = getByRole("button", { label: "Sign In" });
-      fireEvent.click(signInBtn);
-      //Once Modal is rendered...grab find all the elements
-      let emailInput = getByPlaceholderText("email@provider.com");
-      let passwordInput = getByPlaceholderText("Password");
-      let logInButton = getByText("Log in");
-      let loginForm = getByRole("form", { label: "Login Form" });
-
+      loginVariables(getByPlaceholderText, getByRole, getByText)
       //Login
       fireEvent.change(getByPlaceholderText("email@provider.com"), {
         target: { value: "gregturing.io" }
@@ -102,6 +95,11 @@ describe("APP Integration Tests", () => {
       expect(loginForm).toBeInTheDocument();
       expect(userLoginErrorMsg).toBeInTheDocument();
     });
+  })
 
+  describe("Movie User Story", () => {
+    it("Displays Movies to the Page", async () => {
+      //You guys will do great!
+    })
   })
 });
