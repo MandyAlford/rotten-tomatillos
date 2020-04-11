@@ -82,3 +82,7 @@
   flex-direction: column;
   align-items: center;
 }
+
+.title-ratings-container {
+  width: 70%;
+}
