@@ -4,8 +4,7 @@ import "./MoviesContainer.css";
 import MovieDetails from "../MovieDetails/MovieDetails";
 import { connect } from "react-redux";
 
-const MoviesContainer = ({ movies }) => {
-  console.log(movies);
+export const MoviesContainer = ({ movies }) => {
   const cards = movies.map((movie) => {
     return <MovieCard key={movie.id} movie={movie} />;
   });
