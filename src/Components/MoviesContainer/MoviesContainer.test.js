@@ -1,5 +1,5 @@
 import React from "react";
-import MoviesContainer from "./MoviesContainer";
+import { MoviesContainer } from "./MoviesContainer";
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
