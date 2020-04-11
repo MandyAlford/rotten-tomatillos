@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import { getMovieDetails } from "../../ApiCalls/ApiCalls";
 import "./MovieDetails.css";
 import { connect } from "react-redux";
-import { rateMovie, getUserRatings } from "../../actions";
+import { getUserRatings } from "../../actions";
 import { bindActionCreators } from "redux";
 import { submitRating, fetchUserRatings } from "../../ApiCalls/ApiCalls";
 
@@ -67,7 +67,7 @@ class MovieDetails extends Component {
           </div>
         )}
         {this.state.movie && (
-          <div>
+          <div className="title-ratings-container">
             <h2 className="movie-detail-title">{this.state.movie.title}</h2>
             <p className="movie-detail-release">
               Release Date: {this.state.movie.release_date}
@@ -130,7 +130,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  rateMovie: (rating) => dispatch(rateMovie(rating)),
   getUserRatings: (ratings) => dispatch(getUserRatings(ratings)),
 });
 
