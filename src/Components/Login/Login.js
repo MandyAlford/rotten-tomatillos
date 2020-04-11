@@ -50,6 +50,9 @@ export class Login extends React.Component {
       login(data);
       showModal(false);
       let userRatings = await fetchUserRatings(data.user.id);
+      if (userRatings.error) {
+        console.log(userRatings.error);
+      }
       getUserRatings(userRatings.ratings);
     }
   };
