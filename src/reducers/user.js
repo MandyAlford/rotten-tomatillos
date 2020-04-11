@@ -1,7 +1,7 @@
 const defaultState = {
-    name: "",
-    id: null,
-    email: ""
+  name: "",
+  id: null,
+  email: "",
 };
 export const user = (state = defaultState, action) => {
   switch (action.type) {
@@ -12,4 +12,4 @@ export const user = (state = defaultState, action) => {
     default:
       return state;
   }
-}
+};

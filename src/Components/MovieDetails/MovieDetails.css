@@ -13,7 +13,7 @@
   width: 100%;
   position: absolute;
   z-index: -1;
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .movie-detail-poster {
@@ -38,4 +38,51 @@
   padding-right: 40px;
 }
 
+.submit-rating-btn {
+  height: 3em;
+  width: 10em;
+  font-size: 1em;
+  padding: 0;
+  background: rgb(219, 219, 219);
+  border: 1px solid black;
+  text-transform: uppercase;
+}
 
+.select {
+  /* -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; Remove default arrow */
+  height: 3em;
+  outline: none;
+  padding: 0.5em;
+  border-radius: 0;
+  font-size: 1em;
+  width: 10em;
+  margin-bottom: 0.5em;
+}
+
+.ratings {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.user-rating-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.rating-number {
+  font-size: 3em;
+}
+
+.rating-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-ratings-container {
+  width: 70%;
+}
