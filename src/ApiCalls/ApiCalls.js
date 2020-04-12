@@ -38,6 +38,6 @@ export const submitRating = (userId, movieId, rating) => {
 };
 
 export const fetchMovies = () => {
-  return fetch("https://rancid-tomatillos.herokuapp.com/api/v1/movie")
+  return fetch("https://rancid-tomatillos.herokuapp.com/api/v1/movies")
     .then((response) => response.json())
 };
