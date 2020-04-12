@@ -11,4 +11,10 @@
 ### Were there any challenges that arose while implementing this feature? If so, how were the addressed?
 
 ### Components/Files modified:
-- [ ] index.html
+- [ ] index.js
+- [ ] actions/index.js
+- [ ] actions/index.test.js
+- [ ] apiCalls/apiCalls.js
+- [ ] app/app.js
+- [ ] app/app.css
+- [ ] app/app.test.js
