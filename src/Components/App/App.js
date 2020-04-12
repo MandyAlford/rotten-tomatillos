@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    const { getMovies } = this.props;
+    const { getMovies, fetchError } = this.props;
     fetchMovies().then((movies) => getMovies(movies.movies))
       .catch(errorMessage => fetchError(errorMessage))
   }
