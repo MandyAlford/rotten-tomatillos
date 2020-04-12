@@ -8,6 +8,7 @@ import MoviesContainer from "../MoviesContainer/MoviesContainer";
 import Header from "../Header/Header";
 import MovieDetails from "../MovieDetails/MovieDetails";
 import { getMovies } from "../../actions";
+import { fetchMovies } from "../../ApiCalls/ApiCalls"
 
 class App extends Component {
   constructor(props) {
@@ -16,10 +17,8 @@ class App extends Component {
 
   componentDidMount = () => {
     const { getMovies } = this.props;
-    fetch("https://rancid-tomatillos.herokuapp.com/api/v1/movies")
-      .then((response) => response.json())
-      .then((movies) => getMovies(movies.movies));
-  };
+    fetchMovies().then((movies) => getMovies(movies.movies));
+  }
 
   render() {
     return (

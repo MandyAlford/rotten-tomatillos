@@ -6,6 +6,10 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { rootReducer } from "../../reducers";
 import App from "./App";
+import { getMovies } from "../../actions";
+import { fetchMovies } from "../../ApiCalls/ApiCalls"
+
+jest.mock('../../ApiCalls/ApiCalls');
 
 describe("APP Integration Tests", () => {
   let store, testWrapper;
@@ -26,6 +30,7 @@ describe("APP Integration Tests", () => {
     let navTitle = getByText("Rancid Tomatillos");
     expect(navTitle).toBeInTheDocument();
   });
+
   describe("Login User Flow",()=>{
     let signInBtn,loginForm,emailInput,passwordInput,loginVariables,logInButton
     beforeEach(()=>{
@@ -99,7 +104,31 @@ describe("APP Integration Tests", () => {
 
   describe("Movie User Story", () => {
     it("Displays Movies to the Page", async () => {
-      //You guys will do great!
+      fetchMovies.mockResolvedValueOnce({
+        movies: [{
+          id: 1,
+          title: 'mock-title',
+          poster_path:'mock-poster-path',
+          backdrop_path: 'mock-backdrop-path',
+          release_date: '2020-04-05',
+          overview: 'mock-overview',
+          average_rating: 5
+        },
+        {
+          id: 2,
+          title: 'mock-title-2',
+          poster_path:'mock-poster-path-2',
+          backdrop_path: 'mock-backdrop-path-2',
+          release_date: '2020-04-05',
+          overview: 'mock-overview-2',
+          average_rating: 5
+        }]
+      })
+      const {  debug, getByText } = render(testWrapper);
+
+      let title = await waitFor(() => getByText('mock-title'))
+
+      expect(title).toBeInTheDocument()
     })
   })
 });
