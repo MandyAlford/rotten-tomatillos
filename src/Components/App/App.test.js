@@ -6,16 +6,56 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { rootReducer } from "../../reducers";
 import App from "./App";
-import { getMovies } from "../../actions";
-import { fetchMovies } from "../../ApiCalls/ApiCalls"
+import { getMovies, getUserRatings } from "../../actions";
+import { fetchMovies, fetchUserLogin,fetchUserRatings } from "../../ApiCalls/ApiCalls"
 
 jest.mock('../../ApiCalls/ApiCalls');
 
 describe("APP Integration Tests", () => {
-  let store, testWrapper;
-
+  let store, testWrapper,mockRatings;
   beforeEach(() => {
+    jest.clearAllMocks();
+    mockRatings = [
+      {
+        id: 63,
+        user_id: 4,
+        movie_id: 4,
+        rating: 5,
+        created_at: "2020-04-11T02:21:06.101Z",
+        updated_at: "2020-04-11T02:21:06.101Z"
+      }
+    ];
     store = createStore(rootReducer);
+    fetchMovies.mockResolvedValueOnce({
+      movies: [{
+        id: 1,
+        title: 'mock-title',
+        poster_path:'mock-poster-path',
+        backdrop_path: 'mock-backdrop-path',
+        release_date: '2020-04-05',
+        overview: 'mock-overview',
+        average_rating: 5
+      },
+      {
+        id: 2,
+        title: 'mock-title-2',
+        poster_path:'mock-poster-path-2',
+        backdrop_path: 'mock-backdrop-path-2',
+        release_date: '2020-04-05',
+        overview: 'mock-overview-2',
+        average_rating: 5
+      }]
+    })
+    fetchUserLogin.mockResolvedValueOnce({
+      user: {
+        id: 1,
+        email: 'greg@turing.io',
+        name:'Greg',
+      }
+    })
+    fetchUserRatings.mockResolvedValue({
+       ratings: [mockRatings]
+    });
     testWrapper = (
       <Provider store={store}>
         <BrowserRouter>
@@ -31,7 +71,7 @@ describe("APP Integration Tests", () => {
     expect(navTitle).toBeInTheDocument();
   });
 
-  describe("Login User Flow",()=>{
+  describe("Login User Flow",() => {
     let signInBtn,loginForm,emailInput,passwordInput,loginVariables,logInButton
     beforeEach(()=>{
       loginVariables = (getByPlaceholderText, getByRole, getByText) =>{
@@ -43,10 +83,10 @@ describe("APP Integration Tests", () => {
         logInButton = getByText("Log in");
       }
     })
+
     it("Can Show Login Modal", () => {
       //setup
       const { getByPlaceholderText, getByRole, getByText } = render(testWrapper);
-
       //Executions
       loginVariables(getByPlaceholderText,getByRole,getByText);
       //assertions
@@ -60,7 +100,6 @@ describe("APP Integration Tests", () => {
       const { getByPlaceholderText, getByRole, getByText } = render(testWrapper);
       //Executions
       loginVariables(getByPlaceholderText,getByRole,getByText);
-
       //Login
       fireEvent.change(getByPlaceholderText("email@provider.com"), {
         target: { value: "greg@turing.io" }
@@ -68,9 +107,7 @@ describe("APP Integration Tests", () => {
       fireEvent.change(getByPlaceholderText("Password"), {
         target: { value: "abc123" }
       });
-
       fireEvent.click(logInButton);
-
       //assertions
       await waitFor(() => expect(loginForm).not.toBeInTheDocument());
       let userGreeting = getByText("Hello, Greg");
@@ -82,7 +119,6 @@ describe("APP Integration Tests", () => {
       const { getByPlaceholderText, getByRole, getByText } = render(
         testWrapper
       );
-
       //Executions
       loginVariables(getByPlaceholderText, getByRole, getByText)
       //Login
@@ -93,7 +129,6 @@ describe("APP Integration Tests", () => {
         target: { value: "abc123" }
       });
       fireEvent.click(logInButton);
-
       //assertion
       expect(loginForm).toBeInTheDocument();
       let userLoginErrorMsg = getByText("Email is not valid");
@@ -125,15 +160,12 @@ describe("APP Integration Tests", () => {
         }]
       })
       const {  debug, getByText } = render(testWrapper);
-
       let title = await waitFor(() => getByText('mock-title'))
-
       expect(title).toBeInTheDocument()
     })
 
     it('should display an error messsage if movies arent fetched', async () => {
-      // fetchMovies.mockRejectedValue(new Error('This is my error'))
-
+      fetchMovies.mockRejectedValue(new Error('This is my error'))
       const { debug, getByText } = render(testWrapper);
       debug();
     })
