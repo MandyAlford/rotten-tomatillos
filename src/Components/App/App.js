@@ -7,7 +7,7 @@ import Login from "../Login/Login";
 import MoviesContainer from "../MoviesContainer/MoviesContainer";
 import Header from "../Header/Header";
 import MovieDetails from "../MovieDetails/MovieDetails";
-import { getMovies } from "../../actions";
+import { getMovies, fetchError } from "../../actions";
 import { fetchMovies } from "../../ApiCalls/ApiCalls"
 
 class App extends Component {
@@ -17,16 +17,18 @@ class App extends Component {
 
   componentDidMount = () => {
     const { getMovies } = this.props;
-    fetchMovies().then((movies) => getMovies(movies.movies));
+    fetchMovies().then((movies) => getMovies(movies.movies))
+      .catch(errorMessage => fetchError(errorMessage))
   }
 
   render() {
+
     return (
       <div>
         <Route path="/" exact>
           <Header />
           <Login />
-          <MoviesContainer />
+            {!this.props.error.isError ? <MoviesContainer/>: <span> Oops something went wrong </span>}
         </Route>
         <Route path="/movies/:movie_id" exact component={MovieDetails}></Route>
       </div>
@@ -35,6 +37,8 @@ class App extends Component {
 }
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ getMovies }, dispatch);
+  bindActionCreators({ getMovies, fetchError }, dispatch);
 
-export default connect(null, mapDispatchToProps)(App);
+const mapStateToProps = ({ error }) => ({ error })
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

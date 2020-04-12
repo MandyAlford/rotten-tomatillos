@@ -130,5 +130,12 @@ describe("APP Integration Tests", () => {
 
       expect(title).toBeInTheDocument()
     })
+
+    it('should display an error messsage if movies arent fetched', async () => {
+      // fetchMovies.mockRejectedValue(new Error('This is my error'))
+
+      const { debug, getByText } = render(testWrapper);
+      debug();
+    })
   })
 });
