@@ -28,7 +28,7 @@ class App extends Component {
         <Route path="/" exact>
           <Header />
           <Login />
-            {!this.props.error.isError ? <MoviesContainer/>: <span> Oops something went wrong </span>}
+          {!this.props.error.isError ? <MoviesContainer/>: <p> Oops something went wrong </p>}
         </Route>
         <Route path="/movies/:movie_id" exact component={MovieDetails}></Route>
       </div>

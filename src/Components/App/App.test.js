@@ -168,6 +168,8 @@ describe("APP Integration Tests", () => {
       fetchMovies.mockRejectedValue(new Error('This is my error'))
       const { debug, getByText } = render(testWrapper);
       debug();
+
+      expect('This is my error').toBeInTheDocument();
     })
   })
 });
