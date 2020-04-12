@@ -26,7 +26,7 @@ describe("APP Integration Tests", () => {
       }
     ];
     store = createStore(rootReducer);
-    fetchMovies.mockResolvedValueOnce({
+    fetchMovies.mockResolvedValue({
       movies: [{
         id: 1,
         title: 'mock-title',
@@ -165,11 +165,11 @@ describe("APP Integration Tests", () => {
     })
 
     it('should display an error messsage if movies arent fetched', async () => {
-      fetchMovies.mockRejectedValue(new Error('This is my error'))
+      fetchMovies.mockRejectedValue('This is my error')
       const { debug, getByText } = render(testWrapper);
       debug();
 
-      expect('This is my error').toBeInTheDocument();
+      await waitFor(() => expect(getByText('This is my error')).toBeInTheDocument());
     })
   })
 });
