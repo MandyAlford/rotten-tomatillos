@@ -1,11 +1,11 @@
 import React from "react";
 import "./Header.css";
 import tomato from "../../assets/tomato.png";
-import {showModal,logout} from '../../actions';
+import { showModal, logout, clearRatings } from "../../actions";
 import { connect } from "react-redux";
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from "redux";
 
-export const Header = ({ logout, showModal, user,showLoginModal }) => {
+export const Header = ({ logout, showModal, user }) => {
   return (
     <div className="header">
       <div className="logo-nav">
@@ -16,19 +16,14 @@ export const Header = ({ logout, showModal, user,showLoginModal }) => {
       {user.name !== "" ? (
         <div className="greeting-btn-container">
           <div className="greeting">Hello, {user.name}</div>
-          <button
-            className="nav-btn"
-            onClick={(e) => {
-              logout();
-            }}
-          >
+          <button className="nav-btn" onClick={() => logout()}>
             Sign Out
           </button>
         </div>
       ) : (
         <button
           className="nav-btn"
-          onClick={(e) => {
+          onClick={() => {
             showModal(true);
           }}
         >
@@ -39,11 +34,11 @@ export const Header = ({ logout, showModal, user,showLoginModal }) => {
   );
 };
 
-const mapStateToProps = ({user,showLoginModal}) => ({
+const mapStateToProps = ({ user }) => ({
   user,
-  showLoginModal
 });
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({showModal,logout},dispatch));
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ showModal, logout }, dispatch);
 
-export default connect(mapStateToProps,mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

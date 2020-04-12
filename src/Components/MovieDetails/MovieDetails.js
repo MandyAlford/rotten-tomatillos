@@ -28,7 +28,7 @@ class MovieDetails extends Component {
 
   handleChange = (event) => {
     event.preventDefault();
-    const { name, value } = event.target;
+    const { value } = event.target;
     this.setState({ rating: value });
   };
 
@@ -44,7 +44,7 @@ class MovieDetails extends Component {
 
   render() {
     const movieId = parseInt(this.props.match.params.movie_id);
-    const userRating = this.props.ratings.find(
+    const userRating = this.props.user.ratings.find(
       (rating) => rating.movie_id === movieId
     );
     return (

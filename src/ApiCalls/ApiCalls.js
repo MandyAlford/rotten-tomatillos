@@ -9,7 +9,15 @@ export const fetchUserLogin = (userData) => {
     body: JSON.stringify(userData),
   })
     .then((response) => response.json())
-    .then((data) => data);
+    .then((data) => {
+      return fetch(
+        `https://rancid-tomatillos.herokuapp.com/api/v1/users/${data.user.id}/ratings`
+      )
+        .then((response) => response.json())
+        .then((info) => {
+          return { ...data.user, ...info };
+        });
+    });
 };
 
 export const getMovieDetails = () => {
