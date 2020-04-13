@@ -18,6 +18,6 @@ export const getUserRatings = (ratings) => ({
 });
 
 export const getMovies = (movies) => ({
-  type: "GET_MOVIES",
-  movies,
-});
+    type: "GET_MOVIES",
+    movies,
+  });
