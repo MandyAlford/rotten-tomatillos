@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const MovieCard = ({ movie }) => {
   return (
     <Link
+      aria-label  = {`Detailed View of:`+movie.title}
       to={"/movies/" + movie.id}
       className="movie-card"
       style={{

@@ -12,10 +12,10 @@ export const fetchUserLogin = (userData) => {
     .then((data) => data);
 };
 
-export const getMovieDetails = () => {
+export const getMovieDetails = (id) => {
   return fetch(
-    "https://rancid-tomatillos.herokuapp.com/api/v1/movies"
-  ).then((response) => response.json());
+    "https://rancid-tomatillos.herokuapp.com/api/v1/movies/" + id
+  ).then((response) => {let test = response.json(); console.log(test); return test});
 };
 
 export const fetchUserRatings = (userId) => {

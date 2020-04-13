@@ -7,12 +7,17 @@ import { Provider } from "react-redux";
 import { rootReducer } from "../../reducers";
 import App from "./App";
 import { getMovies, getUserRatings } from "../../actions";
-import { fetchMovies, fetchUserLogin,fetchUserRatings } from "../../ApiCalls/ApiCalls"
+import {
+  fetchMovies,
+  fetchUserLogin,
+  fetchUserRatings,
+  getMovieDetails
+} from "../../ApiCalls/ApiCalls";
 
-jest.mock('../../ApiCalls/ApiCalls');
+jest.mock("../../ApiCalls/ApiCalls");
 
 describe("APP Integration Tests", () => {
-  let store, testWrapper,mockRatings;
+  let store, testWrapper, mockRatings;
   beforeEach(() => {
     jest.clearAllMocks();
     mockRatings = [
@@ -27,34 +32,47 @@ describe("APP Integration Tests", () => {
     ];
     store = createStore(rootReducer);
     fetchMovies.mockResolvedValue({
-      movies: [{
-        id: 1,
-        title: 'mock-title',
-        poster_path:'mock-poster-path',
-        backdrop_path: 'mock-backdrop-path',
-        release_date: '2020-04-05',
-        overview: 'mock-overview',
-        average_rating: 5
-      },
-      {
-        id: 2,
-        title: 'mock-title-2',
-        poster_path:'mock-poster-path-2',
-        backdrop_path: 'mock-backdrop-path-2',
-        release_date: '2020-04-05',
-        overview: 'mock-overview-2',
-        average_rating: 5
-      }]
-    })
+      movies: [
+        {
+          id: 1,
+          title: "mock-title",
+          poster_path: "mock-poster-path",
+          backdrop_path: "mock-backdrop-path",
+          release_date: "2020-04-05",
+          overview: "mock-overview",
+          average_rating: 5
+        },
+        {
+          id: 2,
+          title: "mock-title-2",
+          poster_path: "mock-poster-path-2",
+          backdrop_path: "mock-backdrop-path-2",
+          release_date: "2020-04-05",
+          overview: "mock-overview-2",
+          average_rating: 5
+        }
+      ]
+    });
     fetchUserLogin.mockResolvedValueOnce({
       user: {
         id: 1,
-        email: 'greg@turing.io',
-        name:'Greg',
+        email: "greg@turing.io",
+        name: "Greg"
       }
-    })
+    });
     fetchUserRatings.mockResolvedValue({
-       ratings: [mockRatings]
+      ratings: [mockRatings]
+    });
+    getMovieDetails.mockResolvedValue({
+      movie: {
+        id: 1,
+        title: "mock-title",
+        poster_path: "mock-poster-path",
+        backdrop_path: "mock-backdrop-path",
+        release_date: "2020-04-05",
+        overview: "mock-overview",
+        average_rating: 5
+      }
     });
     testWrapper = (
       <Provider store={store}>
@@ -71,24 +89,31 @@ describe("APP Integration Tests", () => {
     expect(navTitle).toBeInTheDocument();
   });
 
-  describe("Login User Flow",() => {
-    let signInBtn,loginForm,emailInput,passwordInput,loginVariables,logInButton
-    beforeEach(()=>{
-      loginVariables = (getByPlaceholderText, getByRole, getByText) =>{
+  describe("Login User Flow", () => {
+    let signInBtn,
+      loginForm,
+      emailInput,
+      passwordInput,
+      loginVariables,
+      logInButton;
+    beforeEach(() => {
+      loginVariables = (getByPlaceholderText, getByRole, getByText) => {
         signInBtn = getByRole("button", { label: "Sign In" });
         fireEvent.click(signInBtn);
         loginForm = getByRole("form", { label: "Login Form" });
         emailInput = getByPlaceholderText("email@provider.com");
         passwordInput = getByPlaceholderText("Password");
         logInButton = getByText("Log in");
-      }
-    })
+      };
+    });
 
     it("Can Show Login Modal", () => {
       //setup
-      const { getByPlaceholderText, getByRole, getByText } = render(testWrapper);
+      const { getByPlaceholderText, getByRole, getByText } = render(
+        testWrapper
+      );
       //Executions
-      loginVariables(getByPlaceholderText,getByRole,getByText);
+      loginVariables(getByPlaceholderText, getByRole, getByText);
       //assertions
       expect(loginForm).toBeInTheDocument();
       expect(emailInput).toBeInTheDocument();
@@ -97,9 +122,11 @@ describe("APP Integration Tests", () => {
 
     it("Can Login, Modal Closes, Displays userName in Header", async () => {
       //setup
-      const { getByPlaceholderText, getByRole, getByText } = render(testWrapper);
+      const { getByPlaceholderText, getByRole, getByText } = render(
+        testWrapper
+      );
       //Executions
-      loginVariables(getByPlaceholderText,getByRole,getByText);
+      loginVariables(getByPlaceholderText, getByRole, getByText);
       //Login
       fireEvent.change(getByPlaceholderText("email@provider.com"), {
         target: { value: "greg@turing.io" }
@@ -120,7 +147,7 @@ describe("APP Integration Tests", () => {
         testWrapper
       );
       //Executions
-      loginVariables(getByPlaceholderText, getByRole, getByText)
+      loginVariables(getByPlaceholderText, getByRole, getByText);
       //Login
       fireEvent.change(getByPlaceholderText("email@provider.com"), {
         target: { value: "gregturing.io" }
@@ -135,41 +162,42 @@ describe("APP Integration Tests", () => {
       expect(loginForm).toBeInTheDocument();
       expect(userLoginErrorMsg).toBeInTheDocument();
     });
-  })
+  });
 
   describe("Movie User Story", () => {
     it("Displays Movies to the Page", async () => {
-      fetchMovies.mockResolvedValueOnce({
-        movies: [{
-          id: 1,
-          title: 'mock-title',
-          poster_path:'mock-poster-path',
-          backdrop_path: 'mock-backdrop-path',
-          release_date: '2020-04-05',
-          overview: 'mock-overview',
-          average_rating: 5
-        },
-        {
-          id: 2,
-          title: 'mock-title-2',
-          poster_path:'mock-poster-path-2',
-          backdrop_path: 'mock-backdrop-path-2',
-          release_date: '2020-04-05',
-          overview: 'mock-overview-2',
-          average_rating: 5
-        }]
+      const { getByText } = render(testWrapper);
+      let title = await waitFor(() => getByText("mock-title"));
+      expect(title).toBeInTheDocument();
+    });
+
+    it("should display an error messsage if movies arent fetched", async () => {
+      fetchMovies.mockRejectedValue("This is my error");
+      const { getByText } = render(testWrapper);
+
+      await waitFor(() =>
+        expect(getByText("This is my error")).toBeInTheDocument()
+      );
+    });
+
+    it("should display details about a movie", async () => {
+      const { getByText, getByRole } = render(testWrapper);
+      let detailedViewLink;
+      await waitFor(() => {
+        detailedViewLink = getByRole("link", {
+          name: "Detailed View of:mock-title"
+        });
+      });
+      expect(detailedViewLink).toBeInTheDocument();
+      fireEvent.click(detailedViewLink);
+      await waitFor(() => {
+        expect(getByText("mock-overview")).toBeInTheDocument();
       })
-      const {  debug, getByText } = render(testWrapper);
-      let title = await waitFor(() => getByText('mock-title'))
-      expect(title).toBeInTheDocument()
-    })
+    });
 
-    it('should display an error messsage if movies arent fetched', async () => {
-      fetchMovies.mockRejectedValue('This is my error')
-      const { debug, getByText } = render(testWrapper);
-      debug();
+    it("should allow for user to modify ratings", async () => {
+      const { getByText, getByRole } = render(testWrapper);
 
-      await waitFor(() => expect(getByText('This is my error')).toBeInTheDocument());
-    })
-  })
+    });
+  });
 });

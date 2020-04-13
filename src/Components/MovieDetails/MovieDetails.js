@@ -17,11 +17,9 @@ class MovieDetails extends Component {
   }
 
   componentDidMount = () => {
-    getMovieDetails().then((data) =>
+    getMovieDetails(this.props.match.params.movie_id).then((data) =>
       this.setState({
-        movie: data.movies.find(
-          (x) => x.id == this.props.match.params.movie_id
-        ),
+        movie: data.movie
       })
     );
   };
