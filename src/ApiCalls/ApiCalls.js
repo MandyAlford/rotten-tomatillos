@@ -15,7 +15,7 @@ export const fetchUserLogin = (userData) => {
 export const getMovieDetails = (id) => {
   return fetch(
     "https://rancid-tomatillos.herokuapp.com/api/v1/movies/" + id
-  ).then((response) => {let test = response.json(); console.log(test); return test});
+  ).then((response) => response.json());
 };
 
 export const fetchUserRatings = (userId) => {

@@ -1,7 +1,7 @@
 import React from "react";
 import "@testing-library/jest-dom";
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { rootReducer } from "../../reducers";
@@ -18,7 +18,7 @@ jest.mock("../../ApiCalls/ApiCalls");
 
 describe("APP Integration Tests", () => {
   let store, testWrapper, mockRatings;
-  beforeEach(() => {
+  beforeEach(async () => {
     jest.clearAllMocks();
     mockRatings = [
       {
@@ -76,9 +76,9 @@ describe("APP Integration Tests", () => {
     });
     testWrapper = (
       <Provider store={store}>
-        <BrowserRouter>
+        <MemoryRouter initialEntries = {['/']}>
           <App />
-        </BrowserRouter>
+        </MemoryRouter>
       </Provider>
     );
   });
@@ -162,19 +162,50 @@ describe("APP Integration Tests", () => {
       expect(loginForm).toBeInTheDocument();
       expect(userLoginErrorMsg).toBeInTheDocument();
     });
+
+    it("should allow for user to modify ratings when logged in", async () => {
+      const { getByText, getByRole,getByPlaceholderText,debug } = render(testWrapper);
+      //Executions
+      loginVariables(getByPlaceholderText, getByRole, getByText);
+      //Login
+      fireEvent.change(getByPlaceholderText("email@provider.com"), {
+        target: { value: "greg@turing.io" }
+      });
+      fireEvent.change(getByPlaceholderText("Password"), {
+        target: { value: "abc123" }
+      });
+      fireEvent.click(logInButton);
+      //assertions
+      let userGreeting
+      await waitFor(() => {userGreeting = getByText("Hello, Greg")});
+      expect(userGreeting).toBeInTheDocument();
+      let detailedViewLink;
+      await waitFor(() => {
+        detailedViewLink = getByRole("link", {
+          name: "Detailed View of:mock-title"
+        });
+      });
+      expect(detailedViewLink).toBeInTheDocument();
+      fireEvent.click(detailedViewLink);
+      let ratingButton;
+      await waitFor(() => {
+        ratingButton = getByText("Rate this movie");
+      })
+      expect(ratingButton).toBeInTheDocument();
+    });
   });
 
   describe("Movie User Story", () => {
     it("Displays Movies to the Page", async () => {
-      const { getByText } = render(testWrapper);
+      const { getByText,debug } = render(testWrapper);
       let title = await waitFor(() => getByText("mock-title"));
       expect(title).toBeInTheDocument();
     });
 
     it("should display an error messsage if movies arent fetched", async () => {
       fetchMovies.mockRejectedValue("This is my error");
-      const { getByText } = render(testWrapper);
-
+      const { getByText,debug } = render(testWrapper);
+      debug();
       await waitFor(() =>
         expect(getByText("This is my error")).toBeInTheDocument()
       );
@@ -195,9 +226,5 @@ describe("APP Integration Tests", () => {
       })
     });
 
-    it("should allow for user to modify ratings", async () => {
-      const { getByText, getByRole } = render(testWrapper);
-
-    });
   });
 });
