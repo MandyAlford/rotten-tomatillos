@@ -3,7 +3,7 @@ import "./MovieCard.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-const MovieCard = ({ movie, user }) => {
+export const MovieCard = ({ movie, user }) => {
   const userRating = user.ratings.find(
     (rating) => rating.movie_id === movie.id
   );
