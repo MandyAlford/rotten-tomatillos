@@ -1,6 +1,6 @@
 import React from "react";
 import { MovieCard } from "./MovieCard";
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { BrowserRouter } from "react-router-dom";
 
@@ -11,7 +11,7 @@ import { rootReducer } from "../../reducers";
 describe("Movie Card", () => {
   const store = createStore(rootReducer);
 
-  let mockMovie, mockUser, setup, mockRatings, mockUser2, mockRatings2;
+  let mockMovie, mockUser, mockRatings, mockUser2, mockRatings2;
 
   beforeEach(() => {
     jest.clearAllMocks();
