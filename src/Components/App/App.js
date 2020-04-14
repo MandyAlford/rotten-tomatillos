@@ -12,10 +12,6 @@ import { fetchMovies } from "../../ApiCalls/ApiCalls";
 import PropTypes from 'prop-types';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount = () => {
     const { getMovies, fetchError } = this.props;
     fetchMovies()

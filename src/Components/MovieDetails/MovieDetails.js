@@ -83,7 +83,7 @@ class MovieDetails extends Component {
                 </p>
               </div>
 
-              {this.props.user.name!='' &&
+              {this.props.user.name!=='' &&
                 (userRating ? (
                   <div className="rating-container">
                     <p className="rating-title">Your rating</p>
