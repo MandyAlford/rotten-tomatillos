@@ -1,5 +1,5 @@
 ## Rotten-Tomatillos
-This Project is a clone of Rotten Tomatoes website, it allows the user to look through movies and add their ratings for a specific movie to the rest of the user base and save their own reviews for repeat viewing!
+This project is a clone of Rotten Tomatoes website. The App allows the user to look through movies and add their ratings for a specific movie to the rest of the user base and save their own reviews for repeat viewing!
 
 ### Learning Goals
 - Write squeaky clean, well refactored code using ES6 syntax.
@@ -44,6 +44,7 @@ This Project is a clone of Rotten Tomatoes website, it allows the user to look t
 - React
 - Redux
 - Create React App
+- React Router
 
 ##### Testing and Styling
 - Jest
@@ -78,7 +79,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ---
 
-## Contributers 
+## Contributors 
 * **Ed Stoner**  - *Initial work* - [gitHubPage](https://github.com/edlsto)
 * **Karen Nguyen**  - *Initial work* - [gitHubPage](https://github.com/KareNguyen94)
 * **Mandy Alford**  - *Initial work* - [gitHubPage](https://github.com/MandyAlford)
