@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { getMovieDetails } from "../../ApiCalls/ApiCalls";
 import "./MovieDetails.css";
 import { connect } from "react-redux";
 import { getUserRatings } from "../../actions";
 import { bindActionCreators } from "redux";
-import { submitRating, fetchUserRatings, getMovieDetails, removeRating } from "../../ApiCalls/ApiCalls";
+import { submitRating, fetchUserRatings,removeRating } from "../../ApiCalls/ApiCalls";
+import PropTypes from "prop-types";
 
 class MovieDetails extends Component {
   constructor(props) {
@@ -58,7 +59,7 @@ class MovieDetails extends Component {
       }
     }
     catch(error) {
-      console.log(error)
+      console.error(error)
     }
     let userRatings = await fetchUserRatings(this.props.user.id);
     this.props.getUserRatings(userRatings.ratings);
@@ -106,12 +107,12 @@ class MovieDetails extends Component {
                 </p>
               </div>
 
-              {this.props.user.name!='' &&
+              {this.props.user.name!=='' &&
                 (userRating ? (
                   <div className="rating-container">
                     <p className="rating-title">Your rating</p>
                     <p className="rating-number">{userRating.rating}</p>
-                    <button className="rating-btn" onClick={(e) => this.handleRemoveRatingClick(this.props.user.id, userRating.id)}>Remove Rating</button>
+                    <button className="rating-btn" onClick={() => this.handleRemoveRatingClick(this.props.user.id, userRating.id)}>Remove Rating</button>
                   </div>
                 ) : (
                   <div className="user-rating-container">
@@ -154,8 +155,21 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getUserRatings: (ratings) => dispatch(getUserRatings(ratings)),
-});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({getUserRatings},dispatch);
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);
+
+MovieDetails.propTypes = {
+  getUserRatings:PropTypes.func,
+  match:PropTypes.shape({
+    params:PropTypes.object
+  }),
+  user: PropTypes.shape({
+    name:PropTypes.string,
+    id:PropTypes.number,
+    email:PropTypes.string,
+    ratings:PropTypes.array,
+  }),
+}

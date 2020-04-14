@@ -6,25 +6,12 @@ import { BrowserRouter } from "react-router-dom";
 import { fetchUserRatings,fetchUserLogin } from "../../ApiCalls/ApiCalls";
 jest.mock("../../ApiCalls/ApiCalls.js");
 
-// import { createStore } from "redux";
-// import { Provider } from "react-redux";
-// import { rootReducer } from "../../reducers";
 
 describe("Login", () => {
-  let mockRatings, mockLogin, mockShowModal, setup, mockGetUserRatings,mockUser;
+  let  mockLogin, mockShowModal, setup, mockGetUserRatings,mockUser;
 
   beforeEach(() => {
     jest.clearAllMocks();
-    mockRatings = [
-      {
-        id: 63,
-        user_id: 4,
-        movie_id: 4,
-        rating: 5,
-        created_at: "2020-04-11T02:21:06.101Z",
-        updated_at: "2020-04-11T02:21:06.101Z",
-      },
-    ];
     mockLogin = jest.fn();
     mockShowModal = jest.fn();
     mockGetUserRatings = jest.fn();
@@ -49,7 +36,7 @@ describe("Login", () => {
   });
   describe("Login Happy ", () => {
     it("sends the correct data up to app via Login", async () => {
-      const { getByPlaceholderText, getByText, getByLabelText } = render(setup);
+      const { getByPlaceholderText, getByText } = render(setup);
 
       fireEvent.change(getByPlaceholderText("email@provider.com"), {
         target: { value: "greg@turing.io" },
@@ -66,13 +53,12 @@ describe("Login", () => {
             name: "Greg",
           },
         });
-        // ID is also 1
       });
     });
   });
   describe("Login Sad ", () => {
     it("will do nothing given incorrect data format", async () => {
-      const { getByPlaceholderText, getByText, getByLabelText } = render(setup);
+      const { getByPlaceholderText, getByText } = render(setup);
 
       fireEvent.change(getByPlaceholderText("email@provider.com"), {
         target: { value: "greguring.io" },

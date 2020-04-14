@@ -4,7 +4,10 @@
     "jest": true,
     "es6": true
   },
-  "plugins": ["import"],
+  "plugins": [
+    "react"
+  ],
+  "parser": "babel-eslint",
 
   "settings": {
     "react": {
@@ -12,9 +15,11 @@
     }
   },
 
-  "extends": ["eslint:recommended"],
+
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 8,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true,
@@ -23,8 +28,21 @@
     }
   },
   "rules": {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
     "no-console": "warn",
-    "no-eval": "error",
-    "import/first": "error"
+    "no-param-reassign": [0, {
+      "props": false
+    }],
+    "prefer-rest-params": 1,
+    "arrow-body-style": 0,
+    "prefer-template": 0,
+    "react/prefer-stateless-function": 1,
+    "react/jsx-no-bind": [0, {
+      "ignoreRefs": false,
+      "allowArrowFunctions": false,
+      "allowBind": true
+    }],
+    "eqeqeq": [2, "smart"]
   }
 }

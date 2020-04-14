@@ -18,7 +18,7 @@ import {
 jest.mock("../../ApiCalls/ApiCalls");
 
 describe("APP Integration Tests", () => {
-  let store, testWrapper, mockRatings,initialState;
+  let store, testWrapper, initialState;
   beforeEach(async () => {
     jest.clearAllMocks();
     initialState = {user:{name:'',id:null,email:'',ratings:[]}}
@@ -75,7 +75,7 @@ describe("APP Integration Tests", () => {
   });
 
   it("Can render The App", () => {
-    const { getByPlaceholderText, getByRole, getByText } = render(testWrapper);
+    const { getByText } = render(testWrapper);
     let navTitle = getByText("Rancid Tomatillos");
     expect(navTitle).toBeInTheDocument();
   });
@@ -113,7 +113,7 @@ describe("APP Integration Tests", () => {
 
     it("Can Login, Modal Closes, Displays userName in Header, renders user ratings on main page", async () => {
       //setup
-      const { getByPlaceholderText, getByRole, getByText,debug } = render(
+      const { getByPlaceholderText, getByRole, getByText } = render(
         testWrapper
       );
       //Executions
@@ -215,7 +215,7 @@ describe("APP Integration Tests", () => {
     });
 
     it("should display details about a movie", async () => {
-      const { getByText, getByRole,debug } = render(testWrapper);
+      const { getByText, getByRole } = render(testWrapper);
       let detailedViewLink;
       await waitFor(() => {
         detailedViewLink = getByRole("link", {

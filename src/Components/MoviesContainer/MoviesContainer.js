@@ -1,8 +1,8 @@
 import React from "react";
 import MovieCard from "../MovieCard/MovieCard";
 import "./MoviesContainer.css";
-import MovieDetails from "../MovieDetails/MovieDetails";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 const getDate = (movie, user) => {
   const rating = user.ratings.find((rating) => rating.movie_id === movie.id);
@@ -41,3 +41,13 @@ const mapStateToProps = ({ movies,user }) => ({
 });
 
 export default connect(mapStateToProps)(MoviesContainer);
+
+
+MoviesContainer.propTypes = {
+  user: PropTypes.shape({
+    name:PropTypes.string,
+    id:PropTypes.number,
+    email:PropTypes.string,
+  }),
+  movies: PropTypes.array
+}
