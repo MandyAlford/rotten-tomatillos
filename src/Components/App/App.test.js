@@ -128,16 +128,14 @@ describe("APP Integration Tests", () => {
       fireEvent.click(logInButton);
       //assertions
       await waitFor(() => expect(loginForm).not.toBeInTheDocument());
-      console.log(store.getState().user.ratings);
+      // console.log(store.getState().user.ratings);
       let userGreeting
       await waitFor(() => userGreeting=getByText('Hello, Greg'))
       expect(userGreeting).toBeInTheDocument();
       await waitFor(()=> expect(getByText('Your rating')).toBeInTheDocument())
-
-      debug();
     });
 
-    it.skip("Can reject Login, Doesnt close Modal", async () => {
+    it("Can reject Login, Doesnt close Modal", async () => {
       //setup
       const { getByPlaceholderText, getByRole, getByText } = render(
         testWrapper
@@ -159,8 +157,10 @@ describe("APP Integration Tests", () => {
       expect(userLoginErrorMsg).toBeInTheDocument();
     });
 
-    it.skip("should allow for user to modify ratings when logged in", async () => {
-
+    it("should allow for user to modify ratings when logged in", async () => {
+      fetchUserRatings.mockResolvedValueOnce({
+        ratings: [{ id: 1, user_id: 1, movie_id: 4, rating: 7 }]
+      });
       const { getByText, getByRole, getByPlaceholderText } = render(
         testWrapper
       );
@@ -200,13 +200,13 @@ describe("APP Integration Tests", () => {
   });
 
   describe("Movie User Story", () => {
-    it.skip("Displays Movies to the Page", async () => {
+    it("Displays Movies to the Page", async () => {
       const { getByText } = render(testWrapper);
       let title = await waitFor(() => getByText("mock-title"));
       expect(title).toBeInTheDocument();
     });
 
-    it.skip("should display an error messsage if movies arent fetched", async () => {
+    it("should display an error messsage if movies arent fetched", async () => {
       fetchMovies.mockRejectedValue("This is my error");
       const { getByText } = render(testWrapper);
       await waitFor(() =>
@@ -214,8 +214,8 @@ describe("APP Integration Tests", () => {
       );
     });
 
-    it.skip("should display details about a movie", async () => {
-      const { getByText, getByRole } = render(testWrapper);
+    it("should display details about a movie", async () => {
+      const { getByText, getByRole,debug } = render(testWrapper);
       let detailedViewLink;
       await waitFor(() => {
         detailedViewLink = getByRole("link", {
