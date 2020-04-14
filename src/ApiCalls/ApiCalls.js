@@ -45,6 +45,18 @@ export const submitRating = (userId, movieId, rating) => {
   ).then((response) => response.json());
 };
 
+export const removeRating = (userId, ratingId) => {
+  return fetch(
+    `https://rancid-tomatillos.herokuapp.com/api/v1/users/${userId}/ratings/${ratingId}	`,
+    {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+};
+
 export const fetchMovies = () => {
   return fetch("https://rancid-tomatillos.herokuapp.com/api/v1/movies")
     .then((response) => response.json())
