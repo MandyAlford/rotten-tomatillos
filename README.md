@@ -13,6 +13,8 @@ This Project is a clone of Rotten Tomatoes website, it allows the user to look t
 - Write tests for React components and some asynchronous functionality.
 - Utilize Redux for providing props from a unified prop store
 
+---
+
 ## Screenshots
 ![Rancid Tomatillos ](https://user-images.githubusercontent.com/6379500/79272736-1951b700-7e5f-11ea-8416-26d2c39c0059.gif)
 
@@ -54,8 +56,7 @@ This Project is a clone of Rotten Tomatoes website, it allows the user to look t
 
 ---
 
-
-### Installation
+## Installation
 #### Clone
 - Clone this repo to our local machine using :
 `git clone git@github.com:ERaith/rotten-tomatillos.git`
