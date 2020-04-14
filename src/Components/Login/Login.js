@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
@@ -49,7 +48,7 @@ export class Login extends React.Component {
     } else {
       login(data);
       let userRatings = await fetchUserRatings(this.props.user.id);
-      this.props.getUserRatings(userRatings.ratings);
+      getUserRatings(userRatings.ratings);
       showModal(false);
     }
   };
@@ -113,3 +112,15 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ login, showModal,getUserRatings }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+Login.propTypes = {
+  login: PropTypes.func,
+  showModal: PropTypes.func,
+  getUserRatings: PropTypes.func,
+  showLoginModal: PropTypes.bool,
+  user: PropTypes.shape({
+    name:PropTypes.string,
+    id:PropTypes.number,
+    email:PropTypes.string,
+  }),
+}
