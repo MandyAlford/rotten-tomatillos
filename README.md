@@ -33,6 +33,8 @@ This Project is a clone of Rotten Tomatoes website, it allows the user to look t
 </p>
 </details>
 
+---
+
 ## Technologies Used
 
 ##### Librarys, Frameworks
