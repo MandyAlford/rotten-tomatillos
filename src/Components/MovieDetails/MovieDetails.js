@@ -31,15 +31,22 @@ class MovieDetails extends Component {
   };
 
   handleClick = async (e, movieId) => {
-
-    await submitRating(
-      this.props.user.id,
-      parseInt(movieId),
-      parseInt(this.state.rating)
-    );
-    let userRatings = await fetchUserRatings(this.props.user.id);
-    this.props.getUserRatings(userRatings.ratings);
+    try {
+      let response = await submitRating(
+        this.props.user.id,
+        parseInt(movieId),
+        parseInt(this.state.rating)
+      );
+      if (response.error) {
+        throw Error("Submit unsuccessful");
+      }
+      let userRatings = await fetchUserRatings(this.props.user.id);
+      this.props.getUserRatings(userRatings.ratings);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
 
   handleRemoveRatingClick = async (userId, ratingId) => {
     try {
@@ -105,7 +112,11 @@ class MovieDetails extends Component {
                   <div className="rating-container">
                     <p className="rating-title">Your rating</p>
                     <p className="rating-number">{userRating.rating}</p>
+<<<<<<< HEAD
                     <button onClick={() => this.handleRemoveRatingClick(this.props.user.id, userRating.id)}>Remove Rating</button>
+=======
+                    <button className="rating-btn" onClick={(e) => this.handleRemoveRatingClick(this.props.user.id, userRating.id)}>Remove Rating</button>
+>>>>>>> master
                   </div>
                 ) : (
                   <div className="user-rating-container">
@@ -129,7 +140,7 @@ class MovieDetails extends Component {
                       <option value="10">10</option>
                     </select>
                     <button
-                      className="submit-rating-btn"
+                      className="rating-btn"
                       onClick={(e) => this.handleClick(e, movieId)}
                     >
                       Rate this movie
