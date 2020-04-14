@@ -11,8 +11,8 @@ export const MoviesContainer = ({ movies }) => {
   return <div className="cards-container">{cards}</div>;
 };
 
-const mapStateToProps = (state) => ({
-  movies: state.movies,
+const mapStateToProps = ({ movies }) => ({
+  movies,
 });
 
 export default connect(mapStateToProps)(MoviesContainer);
