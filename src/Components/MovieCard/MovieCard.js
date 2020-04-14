@@ -2,6 +2,7 @@ import React from "react";
 import "./MovieCard.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 export const MovieCard = ({ movie, user }) => {
   const userRating = user.ratings.find(
@@ -51,3 +52,19 @@ const mapStateToProps = ({ user }) => ({
 });
 
 export default connect(mapStateToProps)(MovieCard);
+
+
+MovieCard.propTypes = {
+  movie:PropTypes.shape({
+    id:PropTypes.number,
+    title:PropTypes.string,
+    poster_path:PropTypes.string,
+    average_rating:PropTypes.number,
+  }),
+  user: PropTypes.shape({
+    name:PropTypes.string,
+    id:PropTypes.number,
+    email:PropTypes.string,
+    ratings:PropTypes.array,
+  }),
+}
