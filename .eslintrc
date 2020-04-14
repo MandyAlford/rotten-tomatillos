@@ -31,7 +31,6 @@
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "no-console": "warn",
-    "no-eval": "error",
     "no-param-reassign": [0, {
       "props": false
     }],
@@ -44,5 +43,6 @@
       "allowArrowFunctions": false,
       "allowBind": true
     }],
+    "eqeqeq": [2, "smart"]
   }
 }
