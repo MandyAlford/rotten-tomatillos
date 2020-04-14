@@ -110,7 +110,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 * **Mandy Alford**  - *Initial work* - [gitHubPage](https://github.com/MandyAlford)
 * **Erik Raith**  - *Initial work* - [gitHubPage](https://github.com/ERaith)
 
---
+---
 
 ## License
 
