@@ -4,7 +4,9 @@
     "jest": true,
     "es6": true
   },
-  "plugins": ["import"],
+  "plugins": [
+    "react"
+  ],
 
   "settings": {
     "react": {
@@ -12,7 +14,9 @@
     }
   },
 
-  "extends": ["eslint:recommended"],
+
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+
   "parserOptions": {
     "ecmaVersion": 8,
     "sourceType": "module",
@@ -23,8 +27,9 @@
     }
   },
   "rules": {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
     "no-console": "warn",
     "no-eval": "error",
-    "import/first": "error"
   }
 }
