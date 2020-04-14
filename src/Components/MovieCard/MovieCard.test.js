@@ -9,12 +9,13 @@ import { Provider } from "react-redux";
 import { rootReducer } from "../../reducers";
 
 describe("Movie Card", () => {
-  const store = createStore(rootReducer);
 
-  let mockMovie, mockUser, mockRatings, mockUser2, mockRatings2;
+
+  let mockMovie, mockUser, mockRatings, mockUser2, mockRatings2,store;
 
   beforeEach(() => {
     jest.clearAllMocks();
+    store = createStore(rootReducer);
     mockRatings = [
       {
         id: 63,
@@ -62,7 +63,7 @@ describe("Movie Card", () => {
   });
 
   it("should render the text we expect", () => {
-    const store = createStore(rootReducer);
+
 
     const { getByText } = render(
       <Provider store={store}>
@@ -78,7 +79,7 @@ describe("Movie Card", () => {
   });
 
   it("should not render user rating if one does not exist", () => {
-    const store = createStore(rootReducer);
+
 
     const { queryByText } = render(
       <Provider store={store}>
@@ -91,7 +92,7 @@ describe("Movie Card", () => {
   });
 
   it("should render the user score if a rating exists", () => {
-    const store = createStore(rootReducer);
+
 
     const { queryByText, getByText } = render(
       <Provider store={store}>
