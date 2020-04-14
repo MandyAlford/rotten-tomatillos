@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import { getMovieDetails } from "../../ApiCalls/ApiCalls";
 import "./MovieDetails.css";
 import { connect } from "react-redux";
 import { getUserRatings } from "../../actions";
 import { bindActionCreators } from "redux";
-import { submitRating, fetchUserRatings } from "../../ApiCalls/ApiCalls";
+import { submitRating, fetchUserRatings, getMovieDetails, removeRating } from "../../ApiCalls/ApiCalls";
 
 class MovieDetails extends Component {
   constructor(props) {
@@ -40,6 +39,23 @@ class MovieDetails extends Component {
     let userRatings = await fetchUserRatings(this.props.user.id);
     this.props.getUserRatings(userRatings.ratings);
   };
+
+  handleRemoveRatingClick = async (userId, ratingId) => {
+    try {
+     let response = await removeRating(
+        userId,
+        ratingId
+      )
+      if(response.status !== 204) {
+        throw Error('Delete unsuccessful');
+      }
+    }
+    catch(error) {
+      console.log(error)
+    }
+    let userRatings = await fetchUserRatings(this.props.user.id);
+    this.props.getUserRatings(userRatings.ratings);
+  }
 
   render() {
     const movieId = parseInt(this.props.match.params.movie_id);
@@ -88,6 +104,7 @@ class MovieDetails extends Component {
                   <div className="rating-container">
                     <p className="rating-title">Your rating</p>
                     <p className="rating-number">{userRating.rating}</p>
+                    <button onClick={(e) => this.handleRemoveRatingClick(this.props.user.id, userRating.id)}>Remove Rating</button>
                   </div>
                 ) : (
                   <div className="user-rating-container">
