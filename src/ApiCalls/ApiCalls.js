@@ -20,9 +20,9 @@ export const fetchUserLogin = (userData) => {
     });
 };
 
-export const getMovieDetails = () => {
+export const getMovieDetails = (id) => {
   return fetch(
-    "https://rancid-tomatillos.herokuapp.com/api/v1/movies"
+    "https://rancid-tomatillos.herokuapp.com/api/v1/movies/" + id
   ).then((response) => response.json());
 };
 
@@ -43,4 +43,9 @@ export const submitRating = (userId, movieId, rating) => {
       body: JSON.stringify({ movie_id: movieId, rating: rating }),
     }
   ).then((response) => response.json());
+};
+
+export const fetchMovies = () => {
+  return fetch("https://rancid-tomatillos.herokuapp.com/api/v1/movies")
+    .then((response) => response.json())
 };

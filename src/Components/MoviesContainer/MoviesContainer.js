@@ -35,9 +35,9 @@ export const MoviesContainer = ({ movies, user }) => {
   return <div className="cards-container">{cards}</div>;
 };
 
-const mapStateToProps = ({ movies, user }) => ({
+const mapStateToProps = ({ movies,user }) => ({
   movies,
-  user,
+  user
 });
 
 export default connect(mapStateToProps)(MoviesContainer);

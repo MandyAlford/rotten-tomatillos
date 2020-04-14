@@ -3,32 +3,25 @@ import { Login } from "./Login";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { BrowserRouter } from "react-router-dom";
-import { fetchUserLogin } from "../../ApiCalls/ApiCalls";
+import { fetchUserRatings,fetchUserLogin } from "../../ApiCalls/ApiCalls";
 jest.mock("../../ApiCalls/ApiCalls.js");
 
 
 describe("Login", () => {
-  let mockRatings, mockLogin, mockShowModal, setup, mockGetUserRatings;
+  let  mockLogin, mockShowModal, setup, mockGetUserRatings,mockUser;
 
   beforeEach(() => {
     jest.clearAllMocks();
-    mockRatings = [
-      {
-        id: 63,
-        user_id: 4,
-        movie_id: 4,
-        rating: 5,
-        created_at: "2020-04-11T02:21:06.101Z",
-        updated_at: "2020-04-11T02:21:06.101Z",
-      },
-    ];
     mockLogin = jest.fn();
     mockShowModal = jest.fn();
     mockGetUserRatings = jest.fn();
     fetchUserLogin.mockResolvedValue({
       user: { email: "greg@turing.io", id: 1, name: "Greg" },
     });
-
+    fetchUserRatings.mockResolvedValue({
+      ratings: [{ id: 1, user_id: 1, movie_id: 1, rating: 7 }]
+    });
+    mockUser={name:'',id:null,email:'',ratings:[]}
     setup = (
       <BrowserRouter>
         <Login
@@ -36,6 +29,7 @@ describe("Login", () => {
           getUserRatings={mockGetUserRatings}
           showLoginModal={true}
           showModal={mockShowModal}
+          user={mockUser}
         />
       </BrowserRouter>
     );

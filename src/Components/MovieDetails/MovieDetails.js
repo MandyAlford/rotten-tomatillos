@@ -17,11 +17,9 @@ class MovieDetails extends Component {
   }
 
   componentDidMount = () => {
-    getMovieDetails().then((data) =>
+    getMovieDetails(this.props.match.params.movie_id).then((data) =>
       this.setState({
-        movie: data.movies.find(
-          (x) => x.id == this.props.match.params.movie_id
-        ),
+        movie: data.movie
       })
     );
   };
@@ -33,6 +31,7 @@ class MovieDetails extends Component {
   };
 
   handleClick = async (e, movieId) => {
+
     let response = await submitRating(
       this.props.user.id,
       parseInt(movieId),
@@ -44,9 +43,10 @@ class MovieDetails extends Component {
 
   render() {
     const movieId = parseInt(this.props.match.params.movie_id);
-    const userRating = this.props.user.ratings.find(
-      (rating) => rating.movie_id === movieId
-    );
+    let userRating = this.props.user.ratings.find(
+        (rating) => rating.movie_id === movieId
+      );
+
     return (
       <div className="movie-detail-container">
         <div
@@ -82,7 +82,8 @@ class MovieDetails extends Component {
                   {this.state.movie.average_rating.toFixed(1)}
                 </p>
               </div>
-              {this.props.user.name &&
+
+              {this.props.user.name!='' &&
                 (userRating ? (
                   <div className="rating-container">
                     <p className="rating-title">Your rating</p>
@@ -95,6 +96,7 @@ class MovieDetails extends Component {
                       id="pet-select"
                       onChange={this.handleChange}
                       className="select"
+                      aria-label = "Select User Rating"
                     >
                       <option value="">Select your rating</option>
                       <option value="1">1</option>
@@ -126,7 +128,6 @@ class MovieDetails extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  ratings: state.ratings,
 });
 
 const mapDispatchToProps = (dispatch) => ({
