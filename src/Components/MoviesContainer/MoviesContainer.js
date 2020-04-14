@@ -19,7 +19,6 @@ const sortByDateRated = (movies, user) => {
     if (!nextMovieDate) {
       return -1;
     }
-    console.log(nextMovieDate, prevMovieDate);
     return nextMovieDate - prevMovieDate;
   });
 };
