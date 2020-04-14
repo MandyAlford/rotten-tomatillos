@@ -22,16 +22,6 @@ describe("APP Integration Tests", () => {
   let store, testWrapper, mockRatings;
   beforeEach(async () => {
     jest.clearAllMocks();
-    mockRatings = [
-      {
-        id: 63,
-        user_id: 4,
-        movie_id: 1,
-        rating: 5,
-        created_at: "2020-04-11T02:21:06.101Z",
-        updated_at: "2020-04-11T02:21:06.101Z"
-      }
-    ];
     store = createStore(rootReducer);
     fetchMovies.mockResolvedValue({
       movies: [
@@ -63,7 +53,7 @@ describe("APP Integration Tests", () => {
       }
     });
     fetchUserRatings.mockResolvedValue({
-      ratings: [mockRatings]
+      ratings: [{ id: 1, user_id: 1, movie_id: 1, rating: 7 }]
     });
     getMovieDetails.mockResolvedValue({
       movie: {
@@ -167,7 +157,10 @@ describe("APP Integration Tests", () => {
     });
 
     it("should allow for user to modify ratings when logged in", async () => {
-      const { getByText, getByRole, getByPlaceholderText, debug } = render(
+      fetchUserRatings.mockResolvedValueOnce({
+        ratings: []
+      });
+      const { getByText, getByRole, getByPlaceholderText } = render(
         testWrapper
       );
       //Executions
@@ -196,11 +189,13 @@ describe("APP Integration Tests", () => {
       });
       fireEvent.change(selectRating, { target: { value: 6 } });
       // submit rating!
+
       let submitRatingDetails = getByText("Rate this movie");
       fireEvent.click(submitRatingDetails);
 
       //assertions
       await waitFor(() => expect(submitRating).toHaveBeenCalledWith(1, 1, 6));
+      await waitFor(() => expect(getByText("Your rating")).toBeInTheDocument());
     });
   });
 
