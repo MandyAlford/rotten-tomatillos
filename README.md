@@ -9,8 +9,8 @@ This project is a clone of Rotten Tomatoes website. The App allows the user to l
 - Think deeply about React Lifecycle Methods.
 - Use propTypes for every component receiving props.
 - Write tests for React components and asynchronous functionality.
-- Utilize Redux for providing props from a unified prop store
-- Write tests for Redux actions and reducers.
+- Utilize Redux for providing props from a unified prop store.
+- Write full coverage tests for Redux actions and reducers.
 
 ---
 
