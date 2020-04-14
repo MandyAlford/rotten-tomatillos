@@ -26,7 +26,22 @@ This Project is a clone of Rotten Tomatoes website, it allows the user to look t
 ![mobile](https://user-images.githubusercontent.com/6379500/79268138-83fef480-7e57-11ea-8beb-4fe0d64e64b7.png)
 
 
+## Technologies Used
 
+##### Librarys, Frameworks
+- JavaScript
+- CSS
+- React
+- Redux
+- Create React App
+
+##### Testing and Styling
+- Jest
+- React Testing Library
+- ESLINT
+
+##### APIS
+- Fetch
 
 
 
@@ -92,3 +107,20 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+---
+
+## Contributers
+* **Ed Stoner**  - *Initial work* - [gitHubPage](https://github.com/edlsto)
+* **Karen Nguyen**  - *Initial work* - [gitHubPage](https://github.com/KareNguyen94)
+* **Mandy Alford**  - *Initial work* - [gitHubPage](https://github.com/MandyAlford)
+* **Erik Raith**  - *Initial work* - [gitHubPage](https://github.com/ERaith)
+
+--
+
+## License
+
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+
+- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- Copyright 2015 © <a href="http://fvcproductions.com" target="_blank">FVCproductions</a>.
