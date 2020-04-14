@@ -52,7 +52,7 @@ class MovieDetails extends Component {
       }
     }
     catch(error) {
-      console.log(error)
+      console.error(error)
     }
     let userRatings = await fetchUserRatings(this.props.user.id);
     this.props.getUserRatings(userRatings.ratings);
@@ -105,7 +105,7 @@ class MovieDetails extends Component {
                   <div className="rating-container">
                     <p className="rating-title">Your rating</p>
                     <p className="rating-number">{userRating.rating}</p>
-                    <button onClick={(e) => this.handleRemoveRatingClick(this.props.user.id, userRating.id)}>Remove Rating</button>
+                    <button onClick={() => this.handleRemoveRatingClick(this.props.user.id, userRating.id)}>Remove Rating</button>
                   </div>
                 ) : (
                   <div className="user-rating-container">
