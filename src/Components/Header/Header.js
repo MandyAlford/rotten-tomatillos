@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.css";
+import {Link} from 'react-router-dom'
 import tomato from "../../assets/tomato.png";
 import { showModal, logout } from "../../actions";
 import { connect } from "react-redux";
@@ -9,11 +10,13 @@ import PropTypes from 'prop-types';
 export const Header = ({ logout, showModal, user }) => {
   return (
     <div className="header">
-      <div className="logo-nav">
-        <img className="nav-tomato" src={tomato} alt="" />
+      <Link className = "home-link" to = "/">
+        <div className="logo-nav">
+          <img className="nav-tomato" src={tomato} alt="" />
 
-        <h1 className="nav-title">Rancid Tomatillos</h1>
-      </div>
+          <h1 className="nav-title">Rancid Tomatillos</h1>
+        </div>
+      </Link>
       {user.name !== "" ? (
         <div className="greeting-btn-container" aria-label = "User Greeting">
           <div className="greeting">Hello, {user.name}</div>

@@ -112,11 +112,7 @@ class MovieDetails extends Component {
                   <div className="rating-container">
                     <p className="rating-title">Your rating</p>
                     <p className="rating-number">{userRating.rating}</p>
-<<<<<<< HEAD
-                    <button onClick={() => this.handleRemoveRatingClick(this.props.user.id, userRating.id)}>Remove Rating</button>
-=======
-                    <button className="rating-btn" onClick={(e) => this.handleRemoveRatingClick(this.props.user.id, userRating.id)}>Remove Rating</button>
->>>>>>> master
+                    <button className="rating-btn" onClick={() => this.handleRemoveRatingClick(this.props.user.id, userRating.id)}>Remove Rating</button>
                   </div>
                 ) : (
                   <div className="user-rating-container">

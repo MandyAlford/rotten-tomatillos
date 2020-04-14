@@ -46,3 +46,8 @@
   font-size: 1.4em;
   margin-bottom: 0.3em;
 }
+
+.home-link{
+  text-decoration: none;
+  color: black;
+}
