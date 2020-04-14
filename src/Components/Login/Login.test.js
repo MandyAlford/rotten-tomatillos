@@ -6,9 +6,6 @@ import { BrowserRouter } from "react-router-dom";
 import { fetchUserLogin } from "../../ApiCalls/ApiCalls";
 jest.mock("../../ApiCalls/ApiCalls.js");
 
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import { rootReducer } from "../../reducers";
 
 describe("Login", () => {
   let mockRatings, mockLogin, mockShowModal, setup, mockGetUserRatings;
@@ -45,7 +42,7 @@ describe("Login", () => {
   });
   describe("Login Happy ", () => {
     it("sends the correct data up to app via Login", async () => {
-      const { getByPlaceholderText, getByText, getByLabelText } = render(setup);
+      const { getByPlaceholderText, getByText } = render(setup);
 
       fireEvent.change(getByPlaceholderText("email@provider.com"), {
         target: { value: "greg@turing.io" },
@@ -62,13 +59,12 @@ describe("Login", () => {
             name: "Greg",
           },
         });
-        // ID is also 1
       });
     });
   });
   describe("Login Sad ", () => {
     it("will do nothing given incorrect data format", async () => {
-      const { getByPlaceholderText, getByText, getByLabelText } = render(setup);
+      const { getByPlaceholderText, getByText } = render(setup);
 
       fireEvent.change(getByPlaceholderText("email@provider.com"), {
         target: { value: "greguring.io" },
