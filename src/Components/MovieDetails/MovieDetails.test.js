@@ -71,7 +71,7 @@ describe("MovieDetails Unit Tests", () => {
     });
 
     it("user when logged in can modify rating", async () => {
-      const { getByText, getByAltText, getByRole, debug } = render(testWrapper);
+      const { getByText, getByRole } = render(testWrapper);
       await waitFor(() => getByText("Bloodshot"));
 
       let selectRating;
@@ -107,10 +107,6 @@ describe("MovieDetails Unit Tests", () => {
     it("should not render ability to change ratings", async () => {
       const {
         queryAllByText,
-        getByText,
-        getByAltText,
-        getByRole,
-        debug
       } = render(testWrapper);
 
       await waitFor(() => {
