@@ -14,6 +14,11 @@ This Project is a clone of Rotten Tomatoes website, it allows the user to look t
 - Utilize Redux for providing props from a unified prop store
 
 ## Screenshots
+![Rancid Tomatillos ](https://user-images.githubusercontent.com/6379500/79272736-1951b700-7e5f-11ea-8416-26d2c39c0059.gif)
+
+<details><summary>More Screenshots</summary>
+<p>
+  
 ##### Home Page 
 ![Home](https://user-images.githubusercontent.com/6379500/79267871-16eb5f00-7e57-11ea-9b65-e49a9d4de1f6.png)
 ##### Login Modal
@@ -24,6 +29,9 @@ This Project is a clone of Rotten Tomatoes website, it allows the user to look t
 ![Movie Details](https://user-images.githubusercontent.com/6379500/79268559-31720800-7e58-11ea-8a56-7f7036e8ad34.png)
 ##### Mobile View
 ![mobile](https://user-images.githubusercontent.com/6379500/79268138-83fef480-7e57-11ea-8beb-4fe0d64e64b7.png)
+
+</p>
+</details>
 
 ## Technologies Used
 
