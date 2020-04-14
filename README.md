@@ -57,9 +57,11 @@ This Project is a clone of Rotten Tomatoes website, it allows the user to look t
 ---
 
 ## Installation
-#### Clone
-- Clone this repo to our local machine using :
-`git clone git@github.com:ERaith/rotten-tomatillos.git`
+
+### Clone
+
+Clone this repo to our local machine using :
+#### `git clone git@github.com:ERaith/rotten-tomatillos.git`
 
 ### Available Scripts
 
