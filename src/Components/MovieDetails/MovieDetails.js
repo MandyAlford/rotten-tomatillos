@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
 import { getMovieDetails } from "../../ApiCalls/ApiCalls";
 import "./MovieDetails.css";
 import { connect } from "react-redux";
 import { getUserRatings } from "../../actions";
 import { bindActionCreators } from "redux";
 import { submitRating, fetchUserRatings } from "../../ApiCalls/ApiCalls";
+import PropTypes from "prop-types";
 
 class MovieDetails extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class MovieDetails extends Component {
 
   handleClick = async (e, movieId) => {
 
-    let response = await submitRating(
+    await submitRating(
       this.props.user.id,
       parseInt(movieId),
       parseInt(this.state.rating)
@@ -130,8 +130,21 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getUserRatings: (ratings) => dispatch(getUserRatings(ratings)),
-});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({getUserRatings},dispatch);
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);
+
+MovieDetails.propTypes = {
+  getUserRatings:PropTypes.func,
+  match:PropTypes.shape({
+    params:PropTypes.object
+  }),
+  user: PropTypes.shape({
+    name:PropTypes.string,
+    id:PropTypes.number,
+    email:PropTypes.string,
+    ratings:PropTypes.array,
+  }),
+}
