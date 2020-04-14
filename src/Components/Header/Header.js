@@ -4,6 +4,7 @@ import tomato from "../../assets/tomato.png";
 import { showModal, logout } from "../../actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import PropTypes from 'prop-types';
 
 export const Header = ({ logout, showModal, user }) => {
   return (
@@ -19,7 +20,7 @@ export const Header = ({ logout, showModal, user }) => {
           <button
             aria-label = "Sign Out"
             className="nav-btn"
-            onClick={(e) => {
+            onClick={() => {
               logout();
             }}
           >
@@ -49,3 +50,13 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ showModal, logout }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
+
+
+Header.propTypes = {
+  logout: PropTypes.func,
+  showModal: PropTypes.func,
+  error: PropTypes.string,
+  user: PropTypes.shape({
+    name:PropTypes.string,
+  }),
+}
