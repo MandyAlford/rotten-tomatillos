@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.css";
 import tomato from "../../assets/tomato.png";
-import { showModal, logout, clearRatings } from "../../actions";
+import { showModal, logout } from "../../actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 

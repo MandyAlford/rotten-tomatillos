@@ -3,13 +3,10 @@ import { Header } from "./Header";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import { rootReducer } from "../../reducers";
 
 describe("header", () => {
   it("should render the text we expect", () => {
-    const store = createStore(rootReducer);
+
     const { getByText } = render(
       <Header
         user={{
@@ -28,7 +25,7 @@ describe("header", () => {
   });
 
   it("should fire correct function when log out button clicked", () => {
-    const store = createStore(rootReducer);
+
     const mockLogOut = jest.fn();
     const mockClearRatings = jest.fn();
     const { getByText } = render(
@@ -48,7 +45,7 @@ describe("header", () => {
   });
 
   it("should fire correct function when log in button clicked", () => {
-    const store = createStore(rootReducer);
+
     const mockShowModal = jest.fn();
     const { getByText } = render(
       <Header
