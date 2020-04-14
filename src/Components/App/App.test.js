@@ -12,7 +12,8 @@ import {
   fetchMovies,
   fetchUserLogin,
   fetchUserRatings,
-  getMovieDetails
+  getMovieDetails,
+  submitRating
 } from "../../ApiCalls/ApiCalls";
 
 jest.mock("../../ApiCalls/ApiCalls");
@@ -78,7 +79,7 @@ describe("APP Integration Tests", () => {
     const history = createMemoryHistory();
     testWrapper = (
       <Provider store={store}>
-        <Router history = {history}>
+        <Router history={history}>
           <App />
         </Router>
       </Provider>
@@ -166,7 +167,9 @@ describe("APP Integration Tests", () => {
     });
 
     it("should allow for user to modify ratings when logged in", async () => {
-      const { getByText, getByRole,getByPlaceholderText,debug } = render(testWrapper);
+      const { getByText, getByRole, getByPlaceholderText, debug } = render(
+        testWrapper
+      );
       //Executions
       loginVariables(getByPlaceholderText, getByRole, getByText);
       //Login
@@ -177,10 +180,7 @@ describe("APP Integration Tests", () => {
         target: { value: "abc123" }
       });
       fireEvent.click(logInButton);
-      //assertions
-      let userGreeting
-      await waitFor(() => {userGreeting = getByText("Hello, Greg")});
-      expect(userGreeting).toBeInTheDocument();
+      //navigate to detailed View of movie
       let detailedViewLink;
       await waitFor(() => {
         detailedViewLink = getByRole("link", {
@@ -189,11 +189,18 @@ describe("APP Integration Tests", () => {
       });
       expect(detailedViewLink).toBeInTheDocument();
       fireEvent.click(detailedViewLink);
-      let ratingButton;
+      // change user rating for movie
+      let selectRating;
       await waitFor(() => {
-        ratingButton = getByText("Rate this movie");
-      })
-      expect(ratingButton).toBeInTheDocument();
+        selectRating = getByRole("combobox", { name: "Select User Rating" });
+      });
+      fireEvent.change(selectRating, { target: { value: 6 } });
+      // submit rating!
+      let submitRatingDetails = getByText("Rate this movie");
+      fireEvent.click(submitRatingDetails);
+
+      //assertions
+      await waitFor(() => expect(submitRating).toHaveBeenCalledWith(1, 1, 6));
     });
   });
 
@@ -207,7 +214,7 @@ describe("APP Integration Tests", () => {
     it("should display an error messsage if movies arent fetched", async () => {
       fetchMovies.mockRejectedValue("This is my error");
       const { getByText } = render(testWrapper);
-            await waitFor(() =>
+      await waitFor(() =>
         expect(getByText("This is my error")).toBeInTheDocument()
       );
     });
@@ -224,8 +231,7 @@ describe("APP Integration Tests", () => {
       fireEvent.click(detailedViewLink);
       await waitFor(() => {
         expect(getByText("mock-overview")).toBeInTheDocument();
-      })
+      });
     });
-
   });
 });
