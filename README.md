@@ -61,7 +61,7 @@ This project is a clone of Rotten Tomatoes website. The App allows the user to l
 ### Clone
 
 Clone this repo to our local machine using :
-#### `git clone git@github.com:ERaith/rotten-tomatillos.git`
+#### `git clone git@github.com:edlsto/rotten-tomatillos.git`
 
 ### Available Scripts
 
