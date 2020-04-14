@@ -6,9 +6,9 @@ import { BrowserRouter } from "react-router-dom";
 import { fetchUserLogin, fetchUserRatings } from "../../ApiCalls/ApiCalls";
 jest.mock("../../ApiCalls/ApiCalls.js");
 
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import { rootReducer } from "../../reducers";
+// import { createStore } from "redux";
+// import { Provider } from "react-redux";
+// import { rootReducer } from "../../reducers";
 
 describe("Login", () => {
   let mockRatings, mockLogin, mockShowModal, setup, mockGetUserRatings;

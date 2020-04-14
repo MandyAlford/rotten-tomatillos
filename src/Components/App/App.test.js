@@ -1,7 +1,8 @@
 import React from "react";
 import "@testing-library/jest-dom";
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import { BrowserRouter, MemoryRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { rootReducer } from "../../reducers";
@@ -24,7 +25,7 @@ describe("APP Integration Tests", () => {
       {
         id: 63,
         user_id: 4,
-        movie_id: 4,
+        movie_id: 1,
         rating: 5,
         created_at: "2020-04-11T02:21:06.101Z",
         updated_at: "2020-04-11T02:21:06.101Z"
@@ -74,11 +75,12 @@ describe("APP Integration Tests", () => {
         average_rating: 5
       }
     });
+    const history = createMemoryHistory();
     testWrapper = (
       <Provider store={store}>
-        <MemoryRouter initialEntries = {['/']}>
+        <Router history = {history}>
           <App />
-        </MemoryRouter>
+        </Router>
       </Provider>
     );
   });
@@ -197,16 +199,15 @@ describe("APP Integration Tests", () => {
 
   describe("Movie User Story", () => {
     it("Displays Movies to the Page", async () => {
-      const { getByText,debug } = render(testWrapper);
+      const { getByText } = render(testWrapper);
       let title = await waitFor(() => getByText("mock-title"));
       expect(title).toBeInTheDocument();
     });
 
     it("should display an error messsage if movies arent fetched", async () => {
       fetchMovies.mockRejectedValue("This is my error");
-      const { getByText,debug } = render(testWrapper);
-      debug();
-      await waitFor(() =>
+      const { getByText } = render(testWrapper);
+            await waitFor(() =>
         expect(getByText("This is my error")).toBeInTheDocument()
       );
     });

@@ -31,6 +31,7 @@ class MovieDetails extends Component {
   };
 
   handleClick = async (e, movieId) => {
+
     let response = await submitRating(
       this.props.user.id,
       parseInt(movieId),
@@ -80,6 +81,7 @@ class MovieDetails extends Component {
                   {this.state.movie.average_rating.toFixed(1)}
                 </p>
               </div>
+
               {this.props.user.name &&
                 (userRating ? (
                   <div className="rating-container">
@@ -93,6 +95,7 @@ class MovieDetails extends Component {
                       id="pet-select"
                       onChange={this.handleChange}
                       className="select"
+                      aria-label = "Select User Rating"
                     >
                       <option value="">Select your rating</option>
                       <option value="1">1</option>
