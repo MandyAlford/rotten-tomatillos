@@ -3,18 +3,12 @@ import "./MovieCard.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-export const MovieCard = ({user,movie}) => {
-  let userRating
-  if(!!user.ratings){
-    userRating = user.ratings.find(
-      (rating) => rating.movie_id === movie.id
-    );
-  }else {
-    userRating = false;
-  }
+export const MovieCard = ({ movie, user }) => {
+  const userRating = user.ratings.find(
+    (rating) => rating.movie_id === movie.id
+  );
   return (
     <Link
-      aria-label  = {`Detailed View of:`+movie.title}
       to={"/movies/" + movie.id}
       className="movie-card"
       style={{
@@ -51,8 +45,8 @@ export const MovieCard = ({user,movie}) => {
   );
 };
 
-const mapStateToProps = (state) => {
-return{user:state.user}
-};
+const mapStateToProps = ({ user }) => ({
+  user,
+});
 
 export default connect(mapStateToProps)(MovieCard);

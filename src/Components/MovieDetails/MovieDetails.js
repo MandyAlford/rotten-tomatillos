@@ -43,14 +43,10 @@ class MovieDetails extends Component {
 
   render() {
     const movieId = parseInt(this.props.match.params.movie_id);
-    let userRating
-    if(!!this.props.user.ratings){
-      userRating = this.props.user.ratings.find(
+    let userRating = this.props.user.ratings.find(
         (rating) => rating.movie_id === movieId
       );
-    }else {
-      userRating = false;
-    }
+
     return (
       <div className="movie-detail-container">
         <div
@@ -87,7 +83,7 @@ class MovieDetails extends Component {
                 </p>
               </div>
 
-              {this.props.user &&
+              {this.props.user.name!='' &&
                 (userRating ? (
                   <div className="rating-container">
                     <p className="rating-title">Your rating</p>

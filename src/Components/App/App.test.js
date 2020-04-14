@@ -46,11 +46,9 @@ describe("APP Integration Tests", () => {
       ]
     });
     fetchUserLogin.mockResolvedValueOnce({
-
         id: 1,
         email: "greg@turing.io",
         name: "Greg"
-
     });
     fetchUserRatings.mockResolvedValue({
       ratings: [{ id: 1, user_id: 1, movie_id: 1, rating: 7 }]
@@ -113,9 +111,9 @@ describe("APP Integration Tests", () => {
       expect(passwordInput).toBeInTheDocument();
     });
 
-    it("Can Login, Modal Closes, Displays userName in Header", async () => {
+    it("Can Login, Modal Closes, Displays userName in Header, renders user ratings on main page", async () => {
       //setup
-      const { getByPlaceholderText, getByRole, getByText } = render(
+      const { getByPlaceholderText, getByRole, getByText,debug } = render(
         testWrapper
       );
       //Executions
@@ -130,13 +128,16 @@ describe("APP Integration Tests", () => {
       fireEvent.click(logInButton);
       //assertions
       await waitFor(() => expect(loginForm).not.toBeInTheDocument());
+      console.log(store.getState().user.ratings);
       let userGreeting
       await waitFor(() => userGreeting=getByText('Hello, Greg'))
       expect(userGreeting).toBeInTheDocument();
-      // console.log(store.getState());
+      await waitFor(()=> expect(getByText('Your rating')).toBeInTheDocument())
+
+      debug();
     });
 
-    it("Can reject Login, Doesnt close Modal", async () => {
+    it.skip("Can reject Login, Doesnt close Modal", async () => {
       //setup
       const { getByPlaceholderText, getByRole, getByText } = render(
         testWrapper
@@ -158,7 +159,7 @@ describe("APP Integration Tests", () => {
       expect(userLoginErrorMsg).toBeInTheDocument();
     });
 
-    it("should allow for user to modify ratings when logged in", async () => {
+    it.skip("should allow for user to modify ratings when logged in", async () => {
 
       const { getByText, getByRole, getByPlaceholderText } = render(
         testWrapper
@@ -192,22 +193,20 @@ describe("APP Integration Tests", () => {
 
       let submitRatingDetails = getByText("Rate this movie");
       fireEvent.click(submitRatingDetails);
-      console.log(store.getState())
       //assertions
       await waitFor(() => expect(submitRating).toHaveBeenCalledWith(1, 1, 6));
       await waitFor(() => expect(getByText("Your rating")).toBeInTheDocument());
-      console.log(store.getState())
     });
   });
 
   describe("Movie User Story", () => {
-    it("Displays Movies to the Page", async () => {
+    it.skip("Displays Movies to the Page", async () => {
       const { getByText } = render(testWrapper);
       let title = await waitFor(() => getByText("mock-title"));
       expect(title).toBeInTheDocument();
     });
 
-    it("should display an error messsage if movies arent fetched", async () => {
+    it.skip("should display an error messsage if movies arent fetched", async () => {
       fetchMovies.mockRejectedValue("This is my error");
       const { getByText } = render(testWrapper);
       await waitFor(() =>
@@ -215,7 +214,7 @@ describe("APP Integration Tests", () => {
       );
     });
 
-    it("should display details about a movie", async () => {
+    it.skip("should display details about a movie", async () => {
       const { getByText, getByRole } = render(testWrapper);
       let detailedViewLink;
       await waitFor(() => {

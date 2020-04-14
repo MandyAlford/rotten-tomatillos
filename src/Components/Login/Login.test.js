@@ -3,7 +3,7 @@ import { Login } from "./Login";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { BrowserRouter } from "react-router-dom";
-import { fetchUserLogin } from "../../ApiCalls/ApiCalls";
+import { fetchUserRatings,fetchUserLogin } from "../../ApiCalls/ApiCalls";
 jest.mock("../../ApiCalls/ApiCalls.js");
 
 // import { createStore } from "redux";
@@ -11,7 +11,7 @@ jest.mock("../../ApiCalls/ApiCalls.js");
 // import { rootReducer } from "../../reducers";
 
 describe("Login", () => {
-  let mockRatings, mockLogin, mockShowModal, setup, mockGetUserRatings;
+  let mockRatings, mockLogin, mockShowModal, setup, mockGetUserRatings,mockUser;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -31,7 +31,10 @@ describe("Login", () => {
     fetchUserLogin.mockResolvedValue({
       user: { email: "greg@turing.io", id: 1, name: "Greg" },
     });
-
+    fetchUserRatings.mockResolvedValue({
+      ratings: [{ id: 1, user_id: 1, movie_id: 1, rating: 7 }]
+    });
+    mockUser={name:'',id:null,email:'',ratings:[]}
     setup = (
       <BrowserRouter>
         <Login
@@ -39,6 +42,7 @@ describe("Login", () => {
           getUserRatings={mockGetUserRatings}
           showLoginModal={true}
           showModal={mockShowModal}
+          user={mockUser}
         />
       </BrowserRouter>
     );

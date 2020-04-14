@@ -3,8 +3,8 @@ import { Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import { fetchUserLogin } from "../../ApiCalls/ApiCalls";
-import { login } from "../../actions";
+import { fetchUserLogin,fetchUserRatings } from "../../ApiCalls/ApiCalls";
+import { login,getUserRatings } from "../../actions";
 import { showModal } from "../../actions";
 import "./Login.css";
 
@@ -48,6 +48,8 @@ export class Login extends React.Component {
       this.setState({ email: "", password: "" });
     } else {
       login(data);
+      let userRatings = await fetchUserRatings(this.props.user.id);
+      this.props.getUserRatings(userRatings.ratings);
       showModal(false);
     }
   };
@@ -102,11 +104,12 @@ export class Login extends React.Component {
   }
 }
 
-const mapStateToProps = ({ showLoginModal }) => ({
+const mapStateToProps = ({ showLoginModal,user }) => ({
   showLoginModal,
+  user
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ login, showModal }, dispatch);
+  bindActionCreators({ login, showModal,getUserRatings }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
