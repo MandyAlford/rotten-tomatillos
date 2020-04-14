@@ -8,15 +8,33 @@ describe("actions", () => {
         id: 4,
         name: "Greg",
         email: "greg@turing.io",
+        ratings: [
+          {
+            id: 63,
+            user_id: 4,
+            movie_id: 4,
+            rating: 5,
+            created_at: "2020-04-11T02:21:06.101Z",
+            updated_at: "2020-04-11T02:21:06.101Z",
+          },
+        ],
       },
     };
 
     const result = actions.login({
-      user: {
-        id: 4,
-        name: "Greg",
-        email: "greg@turing.io",
-      },
+      id: 4,
+      name: "Greg",
+      email: "greg@turing.io",
+      ratings: [
+        {
+          id: 63,
+          user_id: 4,
+          movie_id: 4,
+          rating: 5,
+          created_at: "2020-04-11T02:21:06.101Z",
+          updated_at: "2020-04-11T02:21:06.101Z",
+        },
+      ],
     });
 
     expect(result).toEqual(expectedAction);
@@ -89,5 +107,51 @@ describe("actions", () => {
     ]);
 
     expect(result).toEqual(expectedAction);
+  });
+
+  it("should have a type of GET_MOVIES and correct payload", () => {
+    const expectedAction = {
+      type: "GET_MOVIES",
+      movies: [{
+        id: 1,
+        title: "Bloodshot",
+        poster_path: "https://image.tmdb.org/t/p/original//8WUVHemHFH2ZIP6NWkwlHWsyrEL.jpg",
+        backdrop_path: "https://image.tmdb.org/t/p/original//ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg",
+        release_date: "2020-03-05",
+        overview: "After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists.",
+        average_rating: 6
+      },
+      {
+        id: 2,
+        title: "Sonic the Hedgehog",
+        poster_path: "https://image.tmdb.org/t/p/original//aQvJ5WPzZgYVDrxLX4R6cLJCEaQ.jpg",
+        backdrop_path: "https://image.tmdb.org/t/p/original//stmYfCUGd8Iy6kAMBr6AmWqx8Bq.jpg",
+        release_date: "2020-02-12",
+        overview: "Based on the global blockbuster videogame franchise from Sega.",
+        average_rating: 4.333333333333333
+      }
+      ]
+    };
+
+      const result = actions.getMovies([{
+        id: 1,
+        title: "Bloodshot",
+        poster_path: "https://image.tmdb.org/t/p/original//8WUVHemHFH2ZIP6NWkwlHWsyrEL.jpg",
+        backdrop_path: "https://image.tmdb.org/t/p/original//ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg",
+        release_date: "2020-03-05",
+        overview: "After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists.",
+        average_rating: 6
+      },
+      {
+        id: 2,
+        title: "Sonic the Hedgehog",
+        poster_path: "https://image.tmdb.org/t/p/original//aQvJ5WPzZgYVDrxLX4R6cLJCEaQ.jpg",
+        backdrop_path: "https://image.tmdb.org/t/p/original//stmYfCUGd8Iy6kAMBr6AmWqx8Bq.jpg",
+        release_date: "2020-02-12",
+        overview: "Based on the global blockbuster videogame franchise from Sega.",
+        average_rating: 4.333333333333333
+      }
+      ])
+      expect(result).toEqual(expectedAction);
   });
 });

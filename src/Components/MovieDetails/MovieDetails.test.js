@@ -43,7 +43,7 @@ describe("MovieDetails Unit Tests", () => {
   describe("Logged in Tests", () => {
     beforeEach(() => {
       initialState = {
-        user: { name: "Jeff", id: 1, email: "jeff@turing.io" }
+        user: { name: "Jeff", id: 1, email: "jeff@turing.io",ratings:[] }
       };
       testStore = createStore(rootReducer, initialState);
 
@@ -91,7 +91,7 @@ describe("MovieDetails Unit Tests", () => {
   describe("Logged out Tests", () => {
     beforeEach(() => {
       initialState = {
-        user: { name: "", id: null, email: "" }
+        user: { name: "", id: null, email: "", ratings:[]}
       };
       testStore = createStore(rootReducer, initialState);
 

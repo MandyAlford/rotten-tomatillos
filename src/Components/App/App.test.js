@@ -7,7 +7,6 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { rootReducer } from "../../reducers";
 import App from "./App";
-import { getMovies, getUserRatings } from "../../actions";
 import {
   fetchMovies,
   fetchUserLogin,
@@ -19,10 +18,11 @@ import {
 jest.mock("../../ApiCalls/ApiCalls");
 
 describe("APP Integration Tests", () => {
-  let store, testWrapper, mockRatings;
+  let store, testWrapper, mockRatings,initialState;
   beforeEach(async () => {
     jest.clearAllMocks();
-    store = createStore(rootReducer);
+    initialState = {user:{name:'',id:null,email:'',ratings:[]}}
+    store = createStore(rootReducer,initialState);
     fetchMovies.mockResolvedValue({
       movies: [
         {
@@ -46,11 +46,11 @@ describe("APP Integration Tests", () => {
       ]
     });
     fetchUserLogin.mockResolvedValueOnce({
-      user: {
+
         id: 1,
         email: "greg@turing.io",
         name: "Greg"
-      }
+
     });
     fetchUserRatings.mockResolvedValue({
       ratings: [{ id: 1, user_id: 1, movie_id: 1, rating: 7 }]
@@ -130,8 +130,10 @@ describe("APP Integration Tests", () => {
       fireEvent.click(logInButton);
       //assertions
       await waitFor(() => expect(loginForm).not.toBeInTheDocument());
-      let userGreeting = getByText("Hello, Greg");
+      let userGreeting
+      await waitFor(() => userGreeting=getByText('Hello, Greg'))
       expect(userGreeting).toBeInTheDocument();
+      // console.log(store.getState());
     });
 
     it("Can reject Login, Doesnt close Modal", async () => {
@@ -157,9 +159,7 @@ describe("APP Integration Tests", () => {
     });
 
     it("should allow for user to modify ratings when logged in", async () => {
-      fetchUserRatings.mockResolvedValueOnce({
-        ratings: []
-      });
+
       const { getByText, getByRole, getByPlaceholderText } = render(
         testWrapper
       );
@@ -192,10 +192,11 @@ describe("APP Integration Tests", () => {
 
       let submitRatingDetails = getByText("Rate this movie");
       fireEvent.click(submitRatingDetails);
-
+      console.log(store.getState())
       //assertions
       await waitFor(() => expect(submitRating).toHaveBeenCalledWith(1, 1, 6));
       await waitFor(() => expect(getByText("Your rating")).toBeInTheDocument());
+      console.log(store.getState())
     });
   });
 

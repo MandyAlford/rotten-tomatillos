@@ -3,8 +3,8 @@ import { Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import { fetchUserLogin, fetchUserRatings } from "../../ApiCalls/ApiCalls";
-import { login, getUserRatings } from "../../actions";
+import { fetchUserLogin } from "../../ApiCalls/ApiCalls";
+import { login } from "../../actions";
 import { showModal } from "../../actions";
 import "./Login.css";
 
@@ -49,8 +49,6 @@ export class Login extends React.Component {
     } else {
       login(data);
       showModal(false);
-      let userRatings = await fetchUserRatings(data.user.id);
-      getUserRatings(userRatings.ratings);
     }
   };
 
@@ -109,6 +107,6 @@ const mapStateToProps = ({ showLoginModal }) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ login, showModal, getUserRatings }, dispatch);
+  bindActionCreators({ login, showModal }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -3,7 +3,7 @@ import { Login } from "./Login";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { BrowserRouter } from "react-router-dom";
-import { fetchUserLogin, fetchUserRatings } from "../../ApiCalls/ApiCalls";
+import { fetchUserLogin } from "../../ApiCalls/ApiCalls";
 jest.mock("../../ApiCalls/ApiCalls.js");
 
 // import { createStore } from "redux";
@@ -22,18 +22,16 @@ describe("Login", () => {
         movie_id: 4,
         rating: 5,
         created_at: "2020-04-11T02:21:06.101Z",
-        updated_at: "2020-04-11T02:21:06.101Z"
-      }
+        updated_at: "2020-04-11T02:21:06.101Z",
+      },
     ];
     mockLogin = jest.fn();
     mockShowModal = jest.fn();
     mockGetUserRatings = jest.fn();
     fetchUserLogin.mockResolvedValue({
-      user: { email: "greg@turing.io", id: 1, name: "Greg" }
+      user: { email: "greg@turing.io", id: 1, name: "Greg" },
     });
-    fetchUserRatings.mockResolvedValue({
-      userRatings: { ratings: [mockRatings] }
-    });
+
     setup = (
       <BrowserRouter>
         <Login
@@ -50,10 +48,10 @@ describe("Login", () => {
       const { getByPlaceholderText, getByText, getByLabelText } = render(setup);
 
       fireEvent.change(getByPlaceholderText("email@provider.com"), {
-        target: { value: "greg@turing.io" }
+        target: { value: "greg@turing.io" },
       });
       fireEvent.change(getByPlaceholderText("Password"), {
-        target: { value: "abc123" }
+        target: { value: "abc123" },
       });
       fireEvent.click(getByText("Log in"));
       await waitFor(() => {
@@ -61,12 +59,10 @@ describe("Login", () => {
           user: {
             email: "greg@turing.io",
             id: 1,
-            name: "Greg"
-          }
+            name: "Greg",
+          },
         });
-        expect(fetchUserRatings).toHaveBeenCalledTimes(1);
         // ID is also 1
-        expect(fetchUserRatings).toHaveBeenCalledWith(1);
       });
     });
   });
@@ -75,15 +71,14 @@ describe("Login", () => {
       const { getByPlaceholderText, getByText, getByLabelText } = render(setup);
 
       fireEvent.change(getByPlaceholderText("email@provider.com"), {
-        target: { value: "greguring.io" }
+        target: { value: "greguring.io" },
       });
       fireEvent.change(getByPlaceholderText("Password"), {
-        target: { value: "abc123" }
+        target: { value: "abc123" },
       });
       fireEvent.click(getByText("Log in"));
       await waitFor(() => {
         expect(mockLogin).toHaveBeenCalledTimes(0);
-        expect(fetchUserRatings).toHaveBeenCalledTimes(0);
       });
     });
   });

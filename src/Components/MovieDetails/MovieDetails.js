@@ -26,7 +26,7 @@ class MovieDetails extends Component {
 
   handleChange = (event) => {
     event.preventDefault();
-    const { name, value } = event.target;
+    const { value } = event.target;
     this.setState({ rating: value });
   };
 
@@ -43,9 +43,14 @@ class MovieDetails extends Component {
 
   render() {
     const movieId = parseInt(this.props.match.params.movie_id);
-    const userRating = this.props.ratings.find(
-      (rating) => rating.movie_id === movieId
-    );
+    let userRating
+    if(!!this.props.user.ratings){
+      userRating = this.props.user.ratings.find(
+        (rating) => rating.movie_id === movieId
+      );
+    }else {
+      userRating = false;
+    }
     return (
       <div className="movie-detail-container">
         <div
@@ -82,7 +87,7 @@ class MovieDetails extends Component {
                 </p>
               </div>
 
-              {this.props.user.name &&
+              {this.props.user &&
                 (userRating ? (
                   <div className="rating-container">
                     <p className="rating-title">Your rating</p>
@@ -127,7 +132,6 @@ class MovieDetails extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  ratings: state.ratings,
 });
 
 const mapDispatchToProps = (dispatch) => ({
