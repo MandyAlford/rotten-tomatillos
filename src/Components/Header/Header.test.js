@@ -1,5 +1,6 @@
 import React from "react";
 import { Header } from "./Header";
+import { BrowserRouter } from "react-router-dom";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
@@ -8,13 +9,15 @@ describe("header", () => {
   it("should render the text we expect", () => {
 
     const { getByText } = render(
-      <Header
-        user={{
-          name: "Ed",
-          id: 2,
-          email: "ed@ed.com",
-        }}
-      />
+      <BrowserRouter>
+        <Header
+          user={{
+            name: "Ed",
+            id: 2,
+            email: "ed@ed.com",
+          }}
+          />
+      </BrowserRouter>
     );
     const title = getByText("Rancid Tomatillos");
     const signOut = getByText("Sign Out");
@@ -29,6 +32,7 @@ describe("header", () => {
     const mockLogOut = jest.fn();
     const mockClearRatings = jest.fn();
     const { getByText } = render(
+            <BrowserRouter>
       <Header
         user={{
           name: "Ed",
@@ -38,6 +42,7 @@ describe("header", () => {
         logout={mockLogOut}
         clearRatings={mockClearRatings}
       />
+          </BrowserRouter>
     );
     const signOut = getByText("Sign Out");
     fireEvent.click(signOut);
@@ -48,6 +53,7 @@ describe("header", () => {
 
     const mockShowModal = jest.fn();
     const { getByText } = render(
+            <BrowserRouter>
       <Header
         user={{
           name: "",
@@ -56,6 +62,7 @@ describe("header", () => {
         }}
         showModal={mockShowModal}
       />
+          </BrowserRouter>
     );
     const signIn = getByText("Sign In");
     fireEvent.click(signIn);

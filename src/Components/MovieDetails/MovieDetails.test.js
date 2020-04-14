@@ -20,6 +20,7 @@ describe("MovieDetails Unit Tests", () => {
         movie_id: 1
       }
     };
+    submitRating.mockResolvedValue({});
 
     getMovieDetails.mockResolvedValue({
       movie: {
