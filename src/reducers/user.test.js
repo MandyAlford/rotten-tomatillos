@@ -23,11 +23,13 @@ describe("Reducer: showLoginModal", () => {
       name: "greg",
       id: 1,
       email: "greg@turing.io",
+      ratings:[]
     };
     const mockUserData = {
       name: "greg",
       id: 1,
       email: "greg@turing.io",
+      ratings:[]
     };
     const action = { type: "LOGIN_USER", user: mockUserData };
 

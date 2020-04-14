@@ -11,11 +11,12 @@ import { rootReducer } from "../../reducers";
 describe("Movies Container", () => {
   it("should render the text we expect", () => {
     const store = createStore(rootReducer);
-
+    const mockUser = {name:'',id:null,email:''}
     const { getByText } = render(
       <Provider store={store}>
         <BrowserRouter>
           <MoviesContainer
+            user= {mockUser}
             movies={[
               {
                 id: 15,
