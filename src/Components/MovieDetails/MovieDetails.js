@@ -4,7 +4,7 @@ import "./MovieDetails.css";
 import { connect } from "react-redux";
 import { getUserRatings } from "../../actions";
 import { bindActionCreators } from "redux";
-import { submitRating, fetchUserRatings } from "../../ApiCalls/ApiCalls";
+import { submitRating, fetchUserRatings,removeRating } from "../../ApiCalls/ApiCalls";
 import PropTypes from "prop-types";
 
 class MovieDetails extends Component {
