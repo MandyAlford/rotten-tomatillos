@@ -25,7 +25,6 @@ This Project is a clone of Rotten Tomatoes website, it allows the user to look t
 ##### Mobile View
 ![mobile](https://user-images.githubusercontent.com/6379500/79268138-83fef480-7e57-11ea-8beb-4fe0d64e64b7.png)
 
-
 ## Technologies Used
 
 ##### Librarys, Frameworks
@@ -43,27 +42,13 @@ This Project is a clone of Rotten Tomatoes website, it allows the user to look t
 ##### APIS
 - Fetch
 
+---
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### Installation
+#### Clone
+- Clone this repo to our local machine using :
+`git clone git@github.com:ERaith/rotten-tomatillos.git`
 
 ### Available Scripts
 
@@ -73,9 +58,6 @@ In the project directory, you can run:
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
 #### `npm test`
 
@@ -92,7 +74,11 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-#### `npm run eject`
+#### `npm run lint`
+
+Lints the project
+
+
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
@@ -110,7 +96,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ---
 
-## Contributers
+## Contributers 
 * **Ed Stoner**  - *Initial work* - [gitHubPage](https://github.com/edlsto)
 * **Karen Nguyen**  - *Initial work* - [gitHubPage](https://github.com/KareNguyen94)
 * **Mandy Alford**  - *Initial work* - [gitHubPage](https://github.com/MandyAlford)
